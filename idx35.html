@@ -176,11 +176,11 @@
       flex: 1 1 auto;
       display: none;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto 1fr;
+      grid-template-rows: 2fr 1fr;
       gap: 12px;
       min-height: 0;
       padding: 12px;
-      overflow: auto;
+      overflow: hidden;
     }
 
     .card {
@@ -281,7 +281,8 @@
       border-color: transparent;
     }
 
-    .pill-dept-all {
+    .pill-dept-all,
+    .pill-dept-allmembers {
       border-color: #cbd5e1;
       background: #e2e8f0;
       color: #0f172a;
@@ -335,7 +336,13 @@
       text-decoration: underline;
     }
 
+    .announcement-section {
+      overflow: hidden;
+    }
+
     .announcement-list {
+      flex: 1 1 auto;
+      min-height: 0;
       overflow-y: auto;
       padding-right: 2px;
     }
@@ -368,6 +375,7 @@
 
     .info-card {
       gap: 1rem;
+      overflow: auto;
       text-align: center;
     }
 
@@ -1023,7 +1031,11 @@
       const due = DUE_LABELS[task.due] || String(task.due);
       const status = STATUS_LABELS[task.status] || task.status || "Unknown";
       const department = DEPARTMENT_LABELS[task.department] || task.department;
-      const safeDepartmentClass = DEPARTMENT_LABELS[task.department] ? task.department : "all";
+      const safeDepartmentClass = task.department === "allmembers"
+        ? "allmembers"
+        : DEPARTMENT_LABELS[task.department]
+          ? task.department
+          : "all";
 
       const priorityPill = buildElement("span", {
         className: `pill pill-priority-${task.priority}`,
