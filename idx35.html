@@ -868,7 +868,7 @@
 
     function setText(el, value, fallback = "") {
       if (!el) return;
-      el.textContent = value || fallback;
+      el.innerHTML = value || fallback;
     }
 
     function showElement(el, display = "block") {
@@ -1106,7 +1106,7 @@
           getDoc(doc(db, "dashboard", "meetingnote")),
         ]);
 
-        setText(dom.internalFocus, focusSnap.exists() ? focusSnap.data().text : "", "No current focus.");
+        setText(dom.internalFocus, focusSnap.exists() ? focusSnap.data().text : "", "");
         setText(dom.meetingNote, meetingSnap.exists() ? meetingSnap.data().text : "", "");
       } catch (error) {
         console.error(error);
@@ -1148,7 +1148,7 @@
 
         const next = meetings[0];
         if (!next) {
-          setText(dom.countdown, "No upcoming meetings.");
+          setText(dom.countdown, "No upcoming meetings");
           return;
         }
 
