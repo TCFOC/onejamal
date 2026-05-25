@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TStaff</title>
+  <meta name="description" content="TCF Staff Registration and Dashboard" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="https://tcfthailand.com/tstaff/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="128x128" href="favicon.ico" />
+
+  <style>
+    :root {
+      --brand-1: #57a4ff;
+      --brand-2: #5781ff;
+      --brand-3: #fa5ca8;
+      --brand-4: #ff9100;
+      --brand-start: #ad28f5;
+      --brand-end: #2d68f2;
+
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --text: #111111;
+      --muted: #666666;
+      --border: #e6e8ef;
+      --shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+
+      --dept-all: #64748b;
+      --dept-core: #2d68f2;
+      --dept-finance: #26a269;
+      --dept-pr: #7c3aed;
+      --dept-supervision: #eab308;
+      --dept-activities: #ef4444;
+      --dept-recruits: #fb923c;
+      --dept-cc: #9c6b3c;
+      --dept-grading: #475569;
+
+      --status-red: #ef4444;
+      --status-yellow: #f5c32c;
+      --status-green: #22c55e;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100svh;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "IBM Plex Sans Thai", system-ui, sans-serif;
+      line-height: 1.6;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .app-shell {
+      position: relative;
+      display: none;
+      flex-direction: column;
+      min-height: 0;
+      height: 100svh;
+    }
+
+    .topbar {
+      flex: 0 0 auto;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--brand-1), var(--brand-2), var(--brand-3), var(--brand-4));
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .brand-title {
+      white-space: nowrap;
+    }
+
+    .hello-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      border: 0;
+      background: transparent;
+      color: #ffffff;
+      padding: 0;
+      font-weight: 400;
+    }
+
+    .hello-button strong {
+      font-weight: 700;
+    }
+
+    .account-dropdown {
+      position: absolute;
+      top: 64px;
+      right: 20px;
+      z-index: 1000;
+      display: none;
+      width: min(90vw, 280px);
+      padding: 1rem;
+      border: 1px solid #dddddd;
+      border-radius: 12px;
+      background: #ffffff;
+      color: #000000;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .account-dropdown.open {
+      display: block;
+    }
+
+    .account-dropdown p {
+      margin: 0.4rem 0;
+      color: #000000;
+      font-size: 0.9rem;
+    }
+
+    .account-dropdown span {
+      color: var(--muted);
+    }
+
+    .account-dropdown .version {
+      margin-top: 0.8rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .dropdown-button {
+      display: block;
+      width: 100%;
+      margin-top: 0.6rem;
+      padding: 0.65rem;
+      border: 0;
+      border-radius: 8px;
+      color: #ffffff;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .dropdown-button.blue {
+      background: var(--brand-2);
+    }
+
+    .dropdown-button.orange {
+      background: var(--brand-4);
+    }
+
+    .dashboard {
+      flex: 1 1 auto;
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto 1fr;
+      gap: 12px;
+      min-height: 0;
+      padding: 12px;
+      overflow: auto;
+    }
+
+    .card {
+      display: flex;
+      min-height: 0;
+      flex-direction: column;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      animation: fade-up 0.28s ease both;
+    }
+
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card-title {
+      margin: 0 0 0.8rem;
+      color: var(--brand-start);
+      font-size: 1.25rem;
+      line-height: 1.3;
+    }
+
+    .task-card {
+      grid-row: 1 / span 2;
+    }
+
+    .task-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .task-list > li + li {
+      margin-top: 10px;
+    }
+
+    .task-item-card {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-left: 4px solid transparent;
+      border-radius: 12px;
+      background: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .task-item-card.important {
+      border-left-color: var(--status-red);
+    }
+
+    .row-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.25rem 0.55rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .pill-priority-1 {
+      border-color: #fecaca;
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .pill-priority-2 {
+      border-color: #fed7aa;
+      background: #ffedd5;
+      color: #9a3412;
+    }
+
+    .pill-priority-3 {
+      border-color: #fde68a;
+      background: #fef3c7;
+      color: #854d0e;
+    }
+
+    .pill-dept {
+      color: #ffffff;
+      border-color: transparent;
+    }
+
+    .pill-dept-all {
+      border-color: #cbd5e1;
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .pill-dept-core { background: var(--dept-core); }
+    .pill-dept-finance { background: var(--dept-finance); }
+    .pill-dept-pr { background: var(--dept-pr); }
+    .pill-dept-supervision { background: var(--dept-supervision); }
+    .pill-dept-activities { background: var(--dept-activities); }
+    .pill-dept-recruits { background: var(--dept-recruits); }
+    .pill-dept-cc { background: var(--dept-cc); }
+    .pill-dept-grading { background: var(--dept-grading); }
+
+    .row-status {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-bottom: 0.35rem;
+      color: #333333;
+      font-weight: 600;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+    }
+
+    .status-dot.red { background: var(--status-red); }
+    .status-dot.yellow { background: var(--status-yellow); }
+    .status-dot.green { background: var(--status-green); }
+
+    .task-name {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .text-link {
+      display: inline-block;
+      margin-top: 0.8rem;
+      color: var(--brand-end);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .text-link:hover {
+      text-decoration: underline;
+    }
+
+    .announcement-list {
+      overflow-y: auto;
+      padding-right: 2px;
+    }
+
+    .announcement-card {
+      padding: 1rem;
+      margin-bottom: 0.8rem;
+      border-radius: 10px;
+      background: #ffffff;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .announcement-card.important {
+      border-left: 6px solid #f82634;
+      background: #ffeaea;
+    }
+
+    .announcement-title {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .announcement-content {
+      margin: 0;
+      color: #333333;
+      font-size: 0.95rem;
+      white-space: pre-wrap;
+    }
+
+    .info-card {
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .info-button {
+      border: 0;
+      background: transparent;
+      color: var(--brand-end);
+      padding: 0;
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .info-section {
+      border-top: 1px solid #eeeeee;
+      padding-top: 1rem;
+    }
+
+    .info-section h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .info-section p {
+      margin: 0.35rem 0 0;
+      color: #333333;
+      font-size: 0.95rem;
+    }
+
+    .quote {
+      color: #777777;
+      font-size: 0.92rem;
+      font-style: italic;
+    }
+
+    .mobile-shortcuts {
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .shortcut-link {
+      display: block;
+      padding: 1rem;
+      border-radius: 10px;
+      color: #ffffff;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .shortcut-link.purple { background: var(--brand-start); }
+    .shortcut-link.blue { background: var(--brand-end); }
+
+    .recruitment {
+      display: none;
+      flex: 1 1 auto;
+      height: calc(100svh - 64px);
+    }
+
+    .recruitment iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .login-overlay,
+    .info-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .login-box,
+    .info-box {
+      width: min(90vw, 360px);
+      max-height: 90svh;
+      overflow-y: auto;
+      border-radius: 14px;
+      background: #ffffff;
+      color: #111111;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      animation: pop-in 0.22s ease both;
+    }
+
+    .login-box {
+      padding: 2rem;
+    }
+
+    .info-overlay {
+      z-index: 1500;
+      display: none;
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(3px);
+    }
+
+    .info-overlay.open {
+      display: flex;
+    }
+
+    .info-box {
+      position: relative;
+      padding: 22px 26px;
+      text-align: center;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: var(--brand-end);
+    }
+
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      border: 0;
+      background: transparent;
+      color: #666666;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .close-button:hover {
+      color: #000000;
+    }
+
+    @keyframes pop-in {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .tabs {
+      display: flex;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #eeeeee;
+    }
+
+    .tab-button {
+      flex: 1;
+      padding: 0.6rem;
+      border: 0;
+      border-bottom: 3px solid transparent;
+      background: transparent;
+      color: #555555;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .tab-button.active.login {
+      border-bottom-color: var(--brand-4);
+      color: var(--brand-4);
+    }
+
+    .tab-button.active.signup {
+      border-bottom-color: var(--brand-end);
+      color: var(--brand-end);
+    }
+
+    .auth-form {
+      display: none;
+    }
+
+    .auth-form.active {
+      display: block;
+    }
+
+    .form-input {
+      width: 100%;
+      margin-bottom: 0.8rem;
+      padding: 0.8rem;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--brand-end);
+      box-shadow: 0 0 0 4px rgba(45, 104, 242, 0.12);
+    }
+
+    .form-button {
+      width: 100%;
+      padding: 0.8rem;
+      border: 0;
+      border-radius: 8px;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .form-button.login { background: var(--brand-4); }
+    .form-button.signup { background: var(--brand-end); }
+
+    .form-status {
+      min-height: 1.4em;
+      margin: 0.8rem 0 0;
+      color: #d23;
+      font-size: 0.9rem;
+    }
+
+    .empty-state {
+      border: 2px dashed var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      background: linear-gradient(180deg, #ffffff, #fafbff);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 1000px) {
+      body {
+        overflow: auto;
+      }
+
+      .app-shell {
+        height: auto;
+        min-height: 100svh;
+      }
+
+      .dashboard {
+        display: none;
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        overflow: visible;
+      }
+
+      .dashboard.member-visible {
+        display: grid;
+      }
+
+      .mobile-shortcuts {
+        display: flex;
+      }
+
+      .task-card {
+        display: none;
+      }
+
+      .announcement-list {
+        max-height: 45svh;
+      }
+
+      .recruitment {
+        height: calc(100svh - 64px);
+      }
+    }
+
+    @media (max-width: 640px) {
+      html {
+        font-size: 15px;
+      }
+
+      .topbar {
+        padding: 0.9rem 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main id="appContent" class="app-shell" aria-live="polite">
+    <header class="topbar">
+      <div class="brand-title">One Jamal</div>
+
+      <button id="helloName" class="hello-button" type="button" aria-haspopup="true" aria-expanded="false">
+        <span>Hello,</span>
+        <strong id="userName">Guest</strong>
+      </button>
+
+      <section id="accountDropdown" class="account-dropdown" aria-label="Account menu">
+        <p><strong>Full Name:</strong> <span id="accountName"></span></p>
+        <p><strong>Email:</strong> <span id="accountEmail"></span></p>
+        <p><strong>Status:</strong> <span id="accountStatus"></span></p>
+        <p><strong>Role:</strong> <span id="role"></span></p>
+        <p class="version">One Jamal Version 3.5</p>
+
+        <a class="dropdown-button blue" href="https://tcfthailand.com/tstaff/roles">Account Settings</a>
+        <a id="trbutton" class="dropdown-button blue" href="https://u.lin.ee/t3mThvd">TRewards</a>
+        <button class="dropdown-button orange" type="button" data-action="logout">Logout</button>
+      </section>
+    </header>
+
+    <section id="dashboard" class="dashboard" aria-label="Staff dashboard">
+      <nav id="mobileShortcuts" class="mobile-shortcuts" aria-label="Mobile shortcuts">
+        <a class="shortcut-link purple" href="/tstaff/taskcheck">📋 Taskcheck</a>
+        <a class="shortcut-link blue" href="https://u.lin.ee/t3mThvd">🎁 TRewards</a>
+      </nav>
+
+      <section id="todoCard" class="card task-card">
+        <h2 class="card-title">📋 Top 3 Tasks</h2>
+        <ul id="topTasks" class="task-list"></ul>
+        <a class="text-link" href="https://tcfthailand.com/tstaff/taskcheck">View in Taskcheck →</a>
+      </section>
+
+      <section class="card announcement-section">
+        <h2 class="card-title">📢 Announcements</h2>
+        <div id="announcementsContainer" class="announcement-list"></div>
+      </section>
+
+      <section id="usefulinfo" class="card info-card">
+        <button id="meetingInfoButton" class="info-button" type="button">🗓️ Meeting Information</button>
+
+        <section class="info-section">
+          <h3>📝 Message from the Board</h3>
+          <p id="internalFocus">Loading...</p>
+        </section>
+
+        <section class="info-section quote">
+          <span id="quoteText">Loading inspiration...</span>
+        </section>
+      </section>
+    </section>
+
+    <section id="recruitment" class="recruitment" aria-label="Recruitment page">
+      <iframe src="https://tcfthailand.com/tstaff/recruiter" title="TStaff Recruiter"></iframe>
+    </section>
+  </main>
+
+  <section id="loginOverlay" class="login-overlay" aria-label="Login area">
+    <div class="login-box">
+      <div class="tabs" role="tablist" aria-label="Authentication tabs">
+        <button id="loginTab" class="tab-button login active" type="button" data-tab="login">Login</button>
+        <button id="signupTab" class="tab-button signup" type="button" data-tab="signup">Signup</button>
+      </div>
+
+      <form id="loginForm" class="auth-form active" autocomplete="on">
+        <input id="loginEmail" class="form-input" type="email" placeholder="Email" autocomplete="email" required />
+        <input id="loginPassword" class="form-input" type="password" placeholder="Password" autocomplete="current-password" required />
+        <button class="form-button login" type="submit">Login</button>
+        <p id="loginStatus" class="form-status"></p>
+      </form>
+
+      <form id="signupForm" class="auth-form" autocomplete="on">
+        <input id="signupName" class="form-input" type="text" placeholder="Full Name" autocomplete="name" required />
+        <input id="signupEmail" class="form-input" type="email" placeholder="Email" autocomplete="email" required />
+        <input id="signupPassword" class="form-input" type="password" placeholder="Password" autocomplete="new-password" required />
+        <button class="form-button signup" type="submit">Sign Up</button>
+        <p id="signupStatus" class="form-status"></p>
+      </form>
+    </div>
+  </section>
+
+  <section id="infoboxOverlay" class="info-overlay" aria-label="Meeting information popup">
+    <div class="info-box" role="dialog" aria-modal="true" aria-labelledby="meetingInfoTitle">
+      <button id="closeInfoButton" class="close-button" type="button" aria-label="Close meeting information">✕</button>
+      <h3 id="meetingInfoTitle">Meeting Information</h3>
+      <p>The next team meeting will be held on <b id="countdown">date</b>.</p>
+      <p id="meetingnote"></p>
+      <a class="text-link" href="https://tcfthailand.com/tstaff/calendar">View Full Calendar →</a>
+    </div>
+  </section>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      createUserWithEmailAndPassword,
+      getAuth,
+      onAuthStateChanged,
+      signInWithEmailAndPassword,
+      signOut,
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      collection,
+      doc,
+      getDoc,
+      getFirestore,
+      onSnapshot,
+      orderBy,
+      query,
+      setDoc,
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDKHyMNxgnUH9zn0HQHDNf98GFphC9rv_4",
+      authDomain: "tstaff-tcf.firebaseapp.com",
+      projectId: "tstaff-tcf",
+      storageBucket: "tstaff-tcf.firebasestorage.app",
+      messagingSenderId: "1038965947691",
+      appId: "1:1038965947691:web:8a2f21a6424b82c14ad96e",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const $ = (id) => document.getElementById(id);
+
+    const dom = {
+      appContent: $("appContent"),
+      loginOverlay: $("loginOverlay"),
+      dashboard: $("dashboard"),
+      recruitment: $("recruitment"),
+      helloName: $("helloName"),
+      userName: $("userName"),
+      accountDropdown: $("accountDropdown"),
+      accountName: $("accountName"),
+      accountEmail: $("accountEmail"),
+      accountStatus: $("accountStatus"),
+      role: $("role"),
+      trbutton: $("trbutton"),
+      loginTab: $("loginTab"),
+      signupTab: $("signupTab"),
+      loginForm: $("loginForm"),
+      signupForm: $("signupForm"),
+      loginStatus: $("loginStatus"),
+      signupStatus: $("signupStatus"),
+      topTasks: $("topTasks"),
+      announcementsContainer: $("announcementsContainer"),
+      internalFocus: $("internalFocus"),
+      quoteText: $("quoteText"),
+      infoOverlay: $("infoboxOverlay"),
+      meetingInfoButton: $("meetingInfoButton"),
+      closeInfoButton: $("closeInfoButton"),
+      countdown: $("countdown"),
+      meetingNote: $("meetingnote"),
+    };
+
+    const DEPARTMENT_LABELS = {
+      allmembers: "All Members",
+      core: "Core Team",
+      finance: "Finances & Sponsors",
+      pr: "Public Relations",
+      supervision: "Student Supervision",
+      activities: "Activities",
+      recruits: "New Recruits",
+      cc: "Creative Contest",
+      grading: "Exam Grader",
+    };
+
+    const DUE_LABELS = {
+      10: "October",
+      111: "Early November",
+      112: "Late November",
+      121: "Early December",
+      122: "Late December",
+      1: "January",
+    };
+
+    const PRIORITY_LABELS = {
+      1: "High",
+      2: "Medium",
+      3: "Low",
+    };
+
+    const STATUS_LABELS = {
+      red: "Not Done",
+      yellow: "In Progress",
+      green: "Done",
+    };
+
+    const QUOTES = [
+      "Discipline is the bridge between goals and accomplishment.",
+      "Small steps every day lead to big results.",
+      "Teamwork divides the task and multiplies the success.",
+      "Do what you can, with what you have, where you are.",
+      "Focus on progress, not perfection.",
+      "The only way to achieve the impossible is to believe it is possible.",
+      "Great things are done by a series of small things brought together.",
+      "Success is the sum of small efforts, repeated day in and day out.",
+      "Believe you can and you're halfway there.",
+      "Look, and you will not see.",
+      "Have you eaten your musket?",
+      "Thank you for being a part of our team! ❤️",
+    ];
+
+    const state = {
+      unsubscribers: [],
+    };
+
+    function abbreviateName(fullName = "") {
+      const parts = fullName.trim().split(/\s+/).filter(Boolean);
+      if (parts.length < 2) return fullName || "Guest";
+      return `${parts[0]} ${parts[1][0]}.`;
+    }
+
+    function dueRank(due) {
+      return { 10: 1, 111: 2, 112: 3, 121: 4, 122: 5, 1: 6 }[due] ?? 999;
+    }
+
+    function setText(el, value, fallback = "") {
+      if (!el) return;
+      el.textContent = value || fallback;
+    }
+
+    function showElement(el, display = "block") {
+      if (el) el.style.display = display;
+    }
+
+    function hideElement(el) {
+      if (el) el.style.display = "none";
+    }
+
+    function clearLiveListeners() {
+      state.unsubscribers.forEach((unsubscribe) => unsubscribe());
+      state.unsubscribers = [];
+    }
+
+    function addLiveListener(unsubscribe) {
+      state.unsubscribers.push(unsubscribe);
+    }
+
+    function buildElement(tag, options = {}) {
+      const el = document.createElement(tag);
+      if (options.className) el.className = options.className;
+      if (options.text != null) el.textContent = options.text;
+      if (options.children) el.append(...options.children);
+      return el;
+    }
+
+    function showAccountMenu(open) {
+      dom.accountDropdown.classList.toggle("open", open);
+      dom.helloName.setAttribute("aria-expanded", String(open));
+    }
+
+    function showTab(tab) {
+      const loginActive = tab === "login";
+
+      dom.loginTab.classList.toggle("active", loginActive);
+      dom.signupTab.classList.toggle("active", !loginActive);
+      dom.loginForm.classList.toggle("active", loginActive);
+      dom.signupForm.classList.toggle("active", !loginActive);
+
+      dom.loginStatus.textContent = "";
+      dom.signupStatus.textContent = "";
+    }
+
+    function showInfo() {
+      dom.infoOverlay.classList.add("open");
+    }
+
+    function hideInfo() {
+      dom.infoOverlay.classList.remove("open");
+    }
+
+    function showMemberDashboard() {
+      dom.dashboard.classList.add("member-visible");
+      dom.dashboard.style.display = "grid";
+      hideElement(dom.recruitment);
+      showElement(dom.trbutton, "block");
+    }
+
+    function showRecruitmentPage() {
+      dom.dashboard.classList.remove("member-visible");
+      hideElement(dom.dashboard);
+      showElement(dom.recruitment, "block");
+      hideElement(dom.trbutton);
+    }
+
+    function renderEmpty(container, message) {
+      container.replaceChildren(buildElement("div", { className: "empty-state", text: message }));
+    }
+
+    function loadAnnouncements() {
+      const announcementsQuery = query(collection(db, "announce"), orderBy("timestamp", "desc"));
+
+      const unsubscribe = onSnapshot(
+        announcementsQuery,
+        (snapshot) => {
+          const important = [];
+          const normal = [];
+
+          snapshot.forEach((docSnap) => {
+            const item = { id: docSnap.id, ...docSnap.data() };
+            if (item.important) important.push(item);
+            else normal.push(item);
+          });
+
+          const orderedAnnouncements = [...important, ...normal];
+
+          if (!orderedAnnouncements.length) {
+            renderEmpty(dom.announcementsContainer, "No announcements yet.");
+            return;
+          }
+
+          const cards = orderedAnnouncements.map((item) => {
+            const date = item.timestamp?.toDate?.().toISOString().split("T")[0] || "Unknown Date";
+            const title = buildElement("h3", {
+              className: "announcement-title",
+              text: `[${date}] ${item.title || "Untitled Announcement"}`,
+            });
+            const content = buildElement("p", {
+              className: "announcement-content",
+              text: item.content || "",
+            });
+
+            return buildElement("article", {
+              className: `announcement-card${item.important ? " important" : ""}`,
+              children: [title, content],
+            });
+          });
+
+          dom.announcementsContainer.replaceChildren(...cards);
+        },
+        (error) => {
+          console.error(error);
+          renderEmpty(dom.announcementsContainer, "Unable to load announcements.");
+        },
+      );
+
+      addLiveListener(unsubscribe);
+    }
+
+    function normalizeTask(docSnap) {
+      const task = docSnap.data();
+      const priority = Number(task.priority) || 99;
+      const due = Number(task.due) || 999;
+      const department = String(task.department || "allmembers").toLowerCase();
+      const status = String(task.status || "").toLowerCase();
+
+      return {
+        id: docSnap.id,
+        name: String(task.name || "Untitled Task").trim(),
+        priority,
+        due,
+        department,
+        status,
+        important: Boolean(task.important),
+      };
+    }
+
+    function compareTasks(a, b) {
+      if (a.important !== b.important) return a.important ? -1 : 1;
+
+      const dueDifference = dueRank(a.due) - dueRank(b.due);
+      if (dueDifference) return dueDifference;
+
+      if (a.priority !== b.priority) return a.priority - b.priority;
+
+      if (a.department === "allmembers" && b.department !== "allmembers") return -1;
+      if (b.department === "allmembers" && a.department !== "allmembers") return 1;
+      if (a.department !== b.department) return a.department.localeCompare(b.department);
+
+      const statusRank = { red: 1, yellow: 2, green: 3 };
+      const statusDifference = (statusRank[a.status] || 99) - (statusRank[b.status] || 99);
+      if (statusDifference) return statusDifference;
+
+      return a.name.localeCompare(b.name, "th");
+    }
+
+    function renderTask(task) {
+      const priority = PRIORITY_LABELS[task.priority] || `P${task.priority}`;
+      const due = DUE_LABELS[task.due] || String(task.due);
+      const status = STATUS_LABELS[task.status] || task.status || "Unknown";
+      const department = DEPARTMENT_LABELS[task.department] || task.department;
+      const safeDepartmentClass = DEPARTMENT_LABELS[task.department] ? task.department : "all";
+
+      const priorityPill = buildElement("span", {
+        className: `pill pill-priority-${task.priority}`,
+        text: priority,
+      });
+      const departmentPill = buildElement("span", {
+        className: `pill pill-dept pill-dept-${safeDepartmentClass}`,
+        text: department,
+      });
+      const duePill = buildElement("span", { className: "pill", text: due });
+
+      const topRow = buildElement("div", {
+        className: "row-top",
+        children: [priorityPill, departmentPill, duePill],
+      });
+
+      const statusDot = buildElement("span", { className: `status-dot ${task.status || "green"}` });
+      const statusText = buildElement("span", { text: status });
+      const statusRow = buildElement("div", {
+        className: "row-status",
+        children: [statusDot, statusText],
+      });
+
+      const name = buildElement("p", { className: "task-name", text: task.name });
+      const card = buildElement("article", {
+        className: `task-item-card${task.important ? " important" : ""}`,
+        children: [topRow, statusRow, name],
+      });
+
+      return buildElement("li", { children: [card] });
+    }
+
+    function loadTopTasks() {
+      const taskQuery = query(collection(db, "taskcheck"));
+
+      const unsubscribe = onSnapshot(
+        taskQuery,
+        (snapshot) => {
+          const tasks = [];
+
+          snapshot.forEach((docSnap) => {
+            const task = normalizeTask(docSnap);
+            if (task.status !== "green") tasks.push(task);
+          });
+
+          const topTasks = tasks.sort(compareTasks).slice(0, 3);
+
+          if (!topTasks.length) {
+            dom.topTasks.replaceChildren(buildElement("li", { className: "empty-state", text: "No active tasks 🎉" }));
+            return;
+          }
+
+          dom.topTasks.replaceChildren(...topTasks.map(renderTask));
+        },
+        (error) => {
+          console.error(error);
+          dom.topTasks.replaceChildren(buildElement("li", { className: "empty-state", text: "Unable to load tasks." }));
+        },
+      );
+
+      addLiveListener(unsubscribe);
+    }
+
+    async function loadInternalFocus() {
+      try {
+        const [focusSnap, meetingSnap] = await Promise.all([
+          getDoc(doc(db, "dashboard", "note")),
+          getDoc(doc(db, "dashboard", "meetingnote")),
+        ]);
+
+        setText(dom.internalFocus, focusSnap.exists() ? focusSnap.data().text : "", "No current focus.");
+        setText(dom.meetingNote, meetingSnap.exists() ? meetingSnap.data().text : "", "");
+      } catch (error) {
+        console.error(error);
+        setText(dom.internalFocus, "Unable to load board message.");
+        setText(dom.meetingNote, "");
+      }
+    }
+
+    function loadQuote() {
+      const quote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+      setText(dom.quoteText, quote);
+    }
+
+    async function loadNextMeeting() {
+      try {
+        const response = await fetch(`calendar.html?t=${Date.now()}`);
+        if (!response.ok) throw new Error(`Calendar returned ${response.status}`);
+
+        const html = await response.text();
+        const match = html.match(/const\s+events\s*=\s*(\[[\s\S]*?\]);/);
+        if (!match) throw new Error("No events array found in calendar.html");
+
+        // calendar.html is a same-origin internal file. This keeps the old behavior,
+        // but confines parsing to the extracted array expression instead of global eval().
+        const events = Function(`"use strict"; return (${match[1]});`)();
+        const now = new Date();
+        const today = now.toDateString();
+        const currentHour = now.getHours();
+
+        const meetings = events
+          .filter((event) => String(event.title || "").toLowerCase().includes("meeting"))
+          .map((event) => ({ ...event, dateObj: new Date(event.date) }))
+          .filter((event) => {
+            if (Number.isNaN(event.dateObj.getTime())) return false;
+            if (event.dateObj.toDateString() === today) return currentHour < 16;
+            return event.dateObj > now;
+          })
+          .sort((a, b) => a.dateObj - b.dateObj);
+
+        const next = meetings[0];
+        if (!next) {
+          setText(dom.countdown, "No upcoming meetings.");
+          return;
+        }
+
+        const d = next.dateObj;
+        const formatted = `${d.getDate()} ${d.toLocaleString("en-US", { month: "long" })} ${d.getFullYear()}`;
+        setText(dom.countdown, formatted);
+      } catch (error) {
+        console.error(error);
+        setText(dom.countdown, "Unable to fetch meeting data.");
+      }
+    }
+
+    async function handleLogin(event) {
+      event.preventDefault();
+      dom.loginStatus.textContent = "";
+
+      const email = $("loginEmail").value.trim();
+      const password = $("loginPassword").value;
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (error) {
+        dom.loginStatus.textContent = `Login failed: ${error.message}`;
+      }
+    }
+
+    async function handleSignup(event) {
+      event.preventDefault();
+      dom.signupStatus.textContent = "";
+
+      const name = $("signupName").value.trim();
+      const email = $("signupEmail").value.trim();
+      const password = $("signupPassword").value;
+
+      if (!name) {
+        dom.signupStatus.textContent = "Please enter your full name.";
+        return;
+      }
+
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        await setDoc(doc(db, "users", email), { name, member: false });
+      } catch (error) {
+        dom.signupStatus.textContent = `Signup failed: ${error.message}`;
+      }
+    }
+
+    async function logout() {
+      await signOut(auth);
+      showAccountMenu(false);
+    }
+
+    function setAccountDetails(user, profile) {
+      const name = profile.name || user.email;
+      const memberStatus = profile.member ? "Member" : "Recruit";
+      const department = String(profile.department || "").toLowerCase();
+
+      setText(dom.userName, abbreviateName(name));
+      setText(dom.accountName, name);
+      setText(dom.accountEmail, user.email);
+      setText(dom.accountStatus, memberStatus);
+      setText(dom.role, DEPARTMENT_LABELS[department] || "-");
+    }
+
+    async function handleSignedInUser(user) {
+      hideElement(dom.loginOverlay);
+      showElement(dom.appContent, "flex");
+
+      const userRef = doc(db, "users", user.email);
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {
+        await setDoc(userRef, { name: user.email, member: false });
+      }
+
+      const profile = userSnap.exists() ? userSnap.data() : { name: user.email, member: false };
+      setAccountDetails(user, profile);
+
+      clearLiveListeners();
+
+      if (profile.member) {
+        showMemberDashboard();
+        loadAnnouncements();
+        loadTopTasks();
+        await Promise.all([loadInternalFocus(), loadNextMeeting()]);
+        loadQuote();
+      } else {
+        showRecruitmentPage();
+      }
+    }
+
+    function handleSignedOutUser() {
+      clearLiveListeners();
+      hideElement(dom.appContent);
+      showElement(dom.loginOverlay, "flex");
+      showAccountMenu(false);
+    }
+
+    dom.helloName.addEventListener("click", (event) => {
+      event.stopPropagation();
+      showAccountMenu(!dom.accountDropdown.classList.contains("open"));
+    });
+
+    document.addEventListener("click", (event) => {
+      const clickedInsideMenu = dom.accountDropdown.contains(event.target);
+      const clickedHello = dom.helloName.contains(event.target);
+      if (!clickedInsideMenu && !clickedHello) showAccountMenu(false);
+    });
+
+    dom.accountDropdown.addEventListener("click", (event) => {
+      if (event.target.matches('[data-action="logout"]')) logout();
+    });
+
+    dom.loginTab.addEventListener("click", () => showTab("login"));
+    dom.signupTab.addEventListener("click", () => showTab("signup"));
+    dom.loginForm.addEventListener("submit", handleLogin);
+    dom.signupForm.addEventListener("submit", handleSignup);
+    dom.meetingInfoButton.addEventListener("click", showInfo);
+    dom.closeInfoButton.addEventListener("click", hideInfo);
+    dom.infoOverlay.addEventListener("click", (event) => {
+      if (event.target === dom.infoOverlay) hideInfo();
+    });
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) handleSignedInUser(user).catch(console.error);
+      else handleSignedOutUser();
+    });
+  </script>
+</body>
+</html>
