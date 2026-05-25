@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TStaff</title>
+  <title>Calendar</title>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
 
@@ -39,20 +39,38 @@
     }
 
     .topbar {
-      width: 100%;
-      background: linear-gradient(90deg, var(--brand-start), var(--brand-end));
-      color: #fff;
-      padding: 1rem 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-weight: 600;
-      font-size: 1.2rem;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, .12);
       position: sticky;
       top: 0;
       z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #57A4FF, #5781FF, #FA5CA8, #FF9100);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      font-size: 1.2rem;
+      font-weight: 600;
     }
+
+    .brand-title {
+      white-space: nowrap;
+    }
+
+    .topbar-link {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 400;
+      opacity: 0.95;
+    }
+
+    .topbar-link:hover {
+      text-decoration: underline;
+      opacity: 1;
+    }
+
 
     .nav {
       display: flex;
@@ -174,10 +192,10 @@
 
 <body>
 
-  <div class="topbar">
-    <div>One Jamal Calendar</div>
-    <!--<div><a href="https://tcfthailand.com/tstaff" style="text-decoration:none; color:white; font-weight:300;">&larr; Back to TStaff</a></div>-->
-  </div>
+  <header class="topbar">
+    <div class="brand-title">Calendar</div>
+    <a class="topbar-link" href="https://tcfthailand.com/tstaff" target="_self">← Back to Home</a>
+  </header>
   <br>
   <div class="nav">
     <button class="navbtn" onclick="prevMonth()">&larr;</button>
