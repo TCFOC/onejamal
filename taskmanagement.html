@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Taskcheck Admin</title>
+  <title>One Jamal Admin</title>
   <meta name="description" content="One Jamal Taskcheck Admin Panel" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -552,7 +552,7 @@
 
 <body>
   <header class="topbar">
-    <div class="brand-title">One Jamal · Taskcheck Admin</div>
+    <div class="brand-title">Admin</div>
     <div class="top-actions">
       <a class="topbar-link" href="https://tcfthailand.com/tstaff/taskcheck" target="_self">Open Taskcheck</a>
       <a class="topbar-link" href="https://tcfthailand.com/tstaff" target="_self">Back to TStaff</a>
@@ -563,7 +563,7 @@
   <main id="app" class="shell hidden">
     <section class="hero">
       <div>
-        <h1>Taskcheck Admin Panel</h1>
+        <h1>One Jamal Admin</h1>
         <p id="adminSubtext">Loading tasks...</p>
       </div>
 
@@ -989,7 +989,7 @@
       dom.redCount.textContent = red;
       dom.yellowCount.textContent = yellow;
       dom.greenCount.textContent = green;
-      dom.adminSubtext.textContent = `${state.tasks.length} task${state.tasks.length === 1 ? "" : "s"} loaded from ${COLLECTION_NAME}.`;
+      dom.adminSubtext.textContent = `${state.tasks.length} task${state.tasks.length === 1 ? "" : "s"} found`;
     }
 
     function listenForTasks() {
