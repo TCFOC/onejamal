@@ -350,7 +350,9 @@
     }
 
     .announcement-section {
-      grid-row: 1 / span 2;
+      @media (min-width: 1001px) {
+        grid-row: 1 / span 2;
+      }
       overflow: hidden;
     }
 
