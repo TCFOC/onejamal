@@ -224,7 +224,10 @@
 
     .task-card {
       grid-row: 2 / span 2;
-      overflow: scroll;
+    }
+
+    #todoBox {
+      overflow-y: auto;
     }
 
     .task-list {
@@ -689,8 +692,10 @@
 
       <section id="todoCard" class="card task-card">
         <h2 class="card-title">📋 Top 3 Tasks</h2>
+        <div id="todoBox">
         <ul id="topTasks" class="task-list"></ul>
         <a class="text-link" href="https://tcfthailand.com/tstaff/taskcheck">View in Taskcheck →</a>
+        </div>
       </section>
 
       <section class="card announcement-section">
