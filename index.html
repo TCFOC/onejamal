@@ -185,7 +185,7 @@
       flex: 1 1 auto;
       display: none;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 2fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
       gap: 12px;
       min-height: 0;
       padding: 12px;
@@ -223,7 +223,7 @@
     }
 
     .task-card {
-      grid-row: 1 / span 2;
+      grid-row: 2 / span 2;
     }
 
     .task-list {
@@ -362,6 +362,7 @@
       border-radius: 10px;
       background: #ffffff;
       box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      grid-row: 1 / span 2;
     }
 
     .announcement-card.important {
@@ -682,6 +683,8 @@
       <nav id="mobileShortcuts" class="mobile-shortcuts" aria-label="Mobile shortcuts">
         <a class="shortcut-link purple" href="/tstaff/taskcheck">📋 Taskcheck</a>
       </nav>
+
+      <section class="card">Coming soon...</section>
 
       <section id="todoCard" class="card task-card">
         <h2 class="card-title">📋 Top 3 Tasks</h2>
