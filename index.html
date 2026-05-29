@@ -1128,46 +1128,46 @@
       setText(dom.quoteText, quote);
     }
 
-    async function loadNextMeeting() {
-      try {
-        const response = await fetch(`calendar.html?t=${Date.now()}`);
-        if (!response.ok) throw new Error(`Calendar returned ${response.status}`);
+async function loadNextMeeting() {
+  try {
+    const response = await fetch(`events.json?t=${Date.now()}`);
+    if (!response.ok) throw new Error(`events.json returned ${response.status}`);
 
-        const html = await response.text();
-        const match = html.match(/const\s+events\s*=\s*(\[[\s\S]*?\]);/);
-        if (!match) throw new Error("No events array found in calendar.html");
+    const events = await response.json();
 
-        // calendar.html is a same-origin internal file. This keeps the old behavior,
-        // but confines parsing to the extracted array expression instead of global eval().
-        const events = Function(`"use strict"; return (${match[1]});`)();
-        const now = new Date();
-        const today = now.toDateString();
-        const currentHour = now.getHours();
-
-        const meetings = events
-          .filter((event) => String(event.title || "").toLowerCase().includes("meeting"))
-          .map((event) => ({ ...event, dateObj: new Date(event.date) }))
-          .filter((event) => {
-            if (Number.isNaN(event.dateObj.getTime())) return false;
-            if (event.dateObj.toDateString() === today) return currentHour < 16;
-            return event.dateObj > now;
-          })
-          .sort((a, b) => a.dateObj - b.dateObj);
-
-        const next = meetings[0];
-        if (!next) {
-          setText(dom.countdown, "No upcoming meetings");
-          return;
-        }
-
-        const d = next.dateObj;
-        const formatted = `${d.getDate()} ${d.toLocaleString("en-US", { month: "long" })} ${d.getFullYear()}`;
-        setText(dom.countdown, formatted);
-      } catch (error) {
-        console.error(error);
-        setText(dom.countdown, "Unable to fetch meeting data.");
-      }
+    if (!Array.isArray(events)) {
+      throw new Error("events.json must contain an array of events");
     }
+
+    const now = new Date();
+    const today = now.toDateString();
+    const currentHour = now.getHours();
+
+    const meetings = events
+      .filter((event) => String(event.title || "").toLowerCase().includes("meeting"))
+      .map((event) => ({ ...event, dateObj: new Date(event.date) }))
+      .filter((event) => {
+        if (Number.isNaN(event.dateObj.getTime())) return false;
+        if (event.dateObj.toDateString() === today) return currentHour < 16;
+        return event.dateObj > now;
+      })
+      .sort((a, b) => a.dateObj - b.dateObj);
+
+    const next = meetings[0];
+
+    if (!next) {
+      setText(dom.countdown, "No upcoming meetings");
+      return;
+    }
+
+    const d = next.dateObj;
+    const formatted = `${d.getDate()} ${d.toLocaleString("en-US", { month: "long" })} ${d.getFullYear()}`;
+    setText(dom.countdown, formatted);
+  } catch (error) {
+    console.error(error);
+    setText(dom.countdown, "Unable to fetch meeting data");
+  }
+}
 
     async function handleLogin(event) {
       event.preventDefault();
