@@ -943,10 +943,6 @@
         }),
       ];
 
-      if (application.status !== "rejected") {
-        children.push(el("div", { className: "pill-row", children: [statusPill(application)] }));
-      }
-
       if (application.status === "audition") {
         children.push(
           el("p", { className: "role-desc", text: `Audition: ${application.auditionDate || role.auditionDate || "TBA"}` }),
