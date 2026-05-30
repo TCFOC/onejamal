@@ -53,6 +53,7 @@
     .app-filters{grid-template-columns:1fr 145px 150px 130px}
     .input,.select{width:100%;border:1px solid #ccc;border-radius:10px;padding:.72rem .78rem;outline:none;background:#fff;color:var(--text)}
     .input:focus,.select:focus{border-color:var(--brand-end);box-shadow:0 0 0 4px rgba(45,104,242,.12)}
+    .input{box-sizing:border-box;}
 
     .list{display:grid;gap:10px}
     .item{border:1px solid var(--border);border-left:5px solid transparent;border-radius:14px;background:#fff;padding:.9rem;box-shadow:0 4px 14px rgba(0,0,0,.05)}
@@ -663,7 +664,7 @@
         buttons.push(
           el("button", {
             className: "button orange",
-            text: "Set Audition Time",
+            text: "Set Time",
             dataset: { action: "setAuditionTime", id: a.id }
           })
         );
