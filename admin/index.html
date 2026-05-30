@@ -38,7 +38,15 @@ button{cursor:pointer}
 }
 .topbar-link:hover,.topbar-button:hover{background:rgba(255,255,255,.24)}
 
-.shell{width:min(980px,calc(100% - 24px));margin:0 auto;padding:26px 0 36px}
+.shell{
+  width:min(980px,calc(100% - 24px));
+  margin:0 auto;
+  padding:26px 0 36px;
+  min-height:calc(100dvh - 70px);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
 .hero{margin-bottom:14px}
 .hero h1{margin:0;color:var(--brand-start);font-size:clamp(1.55rem,4vw,2.2rem);line-height:1.2}
 .hero p{margin:.35rem 0 0;color:var(--muted)}
