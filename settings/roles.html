@@ -609,80 +609,23 @@
       Before applyStart: shown but greyed out.
       After applyEnd: hidden from Available completely.
     */
-    const ROLE_GROUPS = [
-      {
-        id: "operations",
-        name: "Operations Group",
-        roles: [
-          {
-            id: "speaker",
-            name: "Speaker",
-            type: "audition",
-            auditionDate: "XX June 2026, 13:00",
-            applyStart: "2026-05-01T00:00:00+07:00",
-            applyEnd: "2026-07-31T23:59:59+07:00",
-            description: "Host or speak for event segments.",
-          },
-          {
-            id: "registration",
-            name: "Registration Desk",
-            type: "direct",
-            max: 7,
-            applyStart: "2026-05-01T00:00:00+07:00",
-            applyEnd: "2026-07-31T23:59:59+07:00",
-            description: "Handle check-in and registration flow.",
-          },
-        ],
-      },
-      {
-        id: "creative-contest",
-        name: "Creative Contest Group",
-        roles: [
-          {
-            id: "cc-booth-guide",
-            name: "Booth Guide",
-            type: "direct",
-            max: 6,
-            applyStart: "2026-05-01T00:00:00+07:00",
-            applyEnd: "2026-07-31T23:59:59+07:00",
-            description: "Look after students and guests around Creative Contest booths.",
-          },
-          {
-            id: "cc-stage-assistant",
-            name: "Stage Assistant",
-            type: "audition",
-            auditionDate: "XX June 2026, 15:00",
-            applyStart: "2026-06-15T00:00:00+07:00",
-            applyEnd: "2026-07-31T23:59:59+07:00",
-            description: "Assist stage flow and finalist transitions.",
-          },
-        ],
-      },
-      {
-        id: "exam",
-        name: "Exam Group",
-        roles: [
-          {
-            id: "grader",
-            name: "Exam Grader",
-            type: "audition",
-            auditionDate: "XX June 2026, 16:00",
-            applyStart: "2026-05-01T00:00:00+07:00",
-            applyEnd: "2026-07-31T23:59:59+07:00",
-            description: "Grade exam papers after the exam period.",
-          },
-          {
-            id: "room-proctor",
-            name: "Room Proctor",
-            type: "direct",
-            max: 10,
-            applyStart: "2026-05-01T00:00:00+07:00",
-            applyEnd: "2026-07-31T23:59:59+07:00",
-            description: "Supervise exam rooms and help maintain order.",
-          },
-        ],
-      },
-    ];
+let ROLE_GROUPS = [];
+
+async function loadRoleGroups() {
+  const response = await fetch(`https://tcfthailand.com/onejamal/data/roles.json?t=${Date.now()}`);
+
+  if (!response.ok) {
+    throw new Error(`roles.json returned ${response.status}`);
+  }
+
+  const data = await response.json();
+
+  if (!Array.isArray(data)) {
+    throw new Error("roles.json must contain an array of role groups");
+  }
+
+  ROLE_GROUPS = data;
+}
 
     const $ = (id) => document.getElementById(id);
 
