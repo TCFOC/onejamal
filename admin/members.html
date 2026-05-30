@@ -675,16 +675,6 @@
       const s = a.status || "unknown";
       const buttons = [];
 
-      if (a.roleType === "audition") {
-        buttons.push(
-          el("button", {
-            className: "button orange",
-            text: "Set Time",
-            dataset: { action: "setAuditionTime", id: a.id }
-          })
-        );
-      }
-
       if (s === "audition") {
         buttons.push(
           el("button", { className: "button green", text: "Pass", dataset: { action: "setStatus", id: a.id, status: "passed" } }),
@@ -701,15 +691,32 @@
 
       if (s === "confirmed") {
         buttons.push(
-          el("button", { className: "button gray", text: "Unconfirm", dataset: { action: "setStatus", id: a.id, status: "passed" } }),
+          if (a.roleType === "audition") {
+            el("button", { className: "button gray", text: "Unconfirm", dataset: { action: "setStatus", id: a.id, status: "passed" } }),
+          }
           el("button", { className: "button red", text: "Cancel", dataset: { action: "setStatus", id: a.id, status: "cancelled" } })
         );
       }
 
       if (["rejected", "declined", "cancelled"].includes(s)) {
+        if (a.roleType === "audition") {
+          buttons.push(
+            el("button", { className: "button gray", text: "Set Audition", dataset: { action: "setStatus", id: a.id, status: "audition" } }),
+            el("button", { className: "button green", text: "Pass", dataset: { action: "setStatus", id: a.id, status: "passed" } })
+          );
+        } else {
+          buttons.push(
+            el("button", { className: "button green", text: "Force Confirm", dataset: { action: "setStatus", id: a.id, status: "confirmed" } })
+          );
+      }
+
+      if (a.roleType === "audition") {
         buttons.push(
-          el("button", { className: "button gray", text: "Set Audition", dataset: { action: "setStatus", id: a.id, status: "audition" } }),
-          el("button", { className: "button green", text: "Pass", dataset: { action: "setStatus", id: a.id, status: "passed" } })
+          el("button", {
+            className: "button orange",
+            text: "Set Time",
+            dataset: { action: "setAuditionTime", id: a.id }
+          })
         );
       }
 
