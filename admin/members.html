@@ -678,7 +678,12 @@
       if (s === "audition") {
         buttons.push(
           el("button", { className: "button green", text: "Pass", dataset: { action: "setStatus", id: a.id, status: "passed" } }),
-          el("button", { className: "button red", text: "Reject", dataset: { action: "setStatus", id: a.id, status: "rejected" } })
+          el("button", { className: "button red", text: "Reject", dataset: { action: "setStatus", id: a.id, status: "rejected" } }),
+          el("button", {
+            className: "button orange",
+            text: "Set Time",
+            dataset: { action: "setAuditionTime", id: a.id }
+          })
         );
       }
 
@@ -713,16 +718,6 @@
             el("button", { className: "button green", text: "Force Confirm", dataset: { action: "setStatus", id: a.id, status: "confirmed" } })
           );
         }
-      }
-
-      if (a.roleType === "audition") {
-        buttons.push(
-          el("button", {
-            className: "button orange",
-            text: "Set Time",
-            dataset: { action: "setAuditionTime", id: a.id }
-          })
-        );
       }
 
       return el("article", {
