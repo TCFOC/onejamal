@@ -897,7 +897,7 @@ async function loadRoleGroups() {
           }),
         );
       } else if (application.status === "cancelled") {
-        children.push(el("p", { className: "role-desc", text: "Audition cancelled, you already have a role in this group." }));
+        children.push(el("p", { className: "role-desc", text: "Sorry, you cannot select this role." }));
       } else if (application.status === "rejected") {
         children.push(el("p", { className: "role-desc", text: "Sorry, you did not pass the audition." }));
       } else if (application.status === "declined") {
