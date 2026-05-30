@@ -102,7 +102,7 @@
     .status-message.success{color:#15803d}
 
     .dialog-overlay{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:1rem;background:rgba(0,0,0,.42);backdrop-filter:blur(3px)}
-    .dialog{width:min(92vw,420px);border:1px solid var(--border);border-radius:18px;background:#fff;box-shadow:0 18px 45px rgba(0,0,0,.22);overflow:hidden;animation:popIn .2s ease both}
+    .dialog{width:min(92vw,420px);max-width: calc(100vw - 24px);border:1px solid var(--border);border-radius:18px;background:#fff;box-shadow:0 18px 45px rgba(0,0,0,.22);overflow:visible;animation:popIn .2s ease both}
     @keyframes popIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
     .dialog-accent{height:7px;background:linear-gradient(135deg,var(--brand-1),var(--brand-2),var(--brand-3),var(--brand-4))}
     .dialog-body{padding:1.2rem}
@@ -110,7 +110,20 @@
     .dialog-message{margin:0;color:#333;font-size:.95rem;white-space:pre-line}
     .dialog-input-wrap{margin-top:1rem}
     .dialog-input-label{display:block;margin-bottom:.35rem;color:#333;font-size:.9rem;font-weight:700}
-    .dialog-input{width:100%;border:1px solid #ccc;border-radius:10px;padding:.72rem .78rem;outline:none;background:#fff;color:var(--text)}
+    /*.dialog-input{width:100%;border:1px solid #ccc;border-radius:10px;padding:.72rem .78rem;outline:none;background:#fff;color:var(--text)}*/
+    .dialog-input {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: .72rem .78rem;
+  outline: none;
+  background: #fff;
+  color: var(--text);
+  -webkit-appearance: none;
+  appearance: none;
+}
     .dialog-input:focus{border-color:var(--brand-end);box-shadow:0 0 0 4px rgba(45,104,242,.12)}
     .dialog-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 1.2rem 1.2rem}
     .dialog-actions.only-confirm{grid-template-columns:1fr}
@@ -843,7 +856,7 @@
         `Enter audition date/time for ${a.userEmail}'s ${roleLabel(a.roleId)}.`,
         {
           inputLabel: "Audition Date & Time",
-          inputType: "datetime-local",
+          inputType: "text",
           inputValue: currentValue,
           confirmText: "Save Time"
         }
