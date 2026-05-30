@@ -724,7 +724,7 @@
                   el("div", { className: "kicker", text: `${group} · ${a.userEmail}` }),
                   el("h3", { className: "item-title", text: title }),
                   el("p", { className: "item-sub", text: name }),
-                  a.auditionDate ? el("p", { className: "item-sub", text: `Audition: ${formatAuditionTime(a.auditionDate)}` }) : ""
+                  a.auditionDate ? el("p", { className: "item-sub", text: `Audition: ${a.auditionDate}` }) : ""
                 ].filter(Boolean)
               }),
               statusPill(s)
