@@ -222,6 +222,37 @@
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
     }
 
+    .role-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .role-head-main {
+      min-width: 0;
+    }
+
+    .role-date {
+      flex: 0 0 auto;
+      max-width: 45%;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      background: #e2e8f0;
+      color: #334155;
+      padding: 0.25rem 0.55rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1.2;
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    .role-date.not-open {
+      background: #f1f5f9;
+      color: #64748b;
+    }
+
     .role-group {
       color: var(--muted);
       font-size: 0.82rem;
@@ -467,6 +498,15 @@
 
       .button-row {
         grid-template-columns: 1fr;
+      }
+
+      .role-head {
+        flex-direction: column;
+      }
+
+      .role-date {
+        max-width: 100%;
+        text-align: left;
       }
     }
   </style>
@@ -832,9 +872,7 @@
       const alreadyApplied = hasRole(role.id);
       const inactive = dateState === "not-open" || full;
 
-      const pills = [
-        pill("blue", role.groupName),
-      ];
+      const pills = [];
 
       if (role.type === "audition") {
         pills.push(pill("orange", "Audition Required"));
@@ -842,26 +880,38 @@
         pills.push(pill(full ? "red" : "gray", `${used}/${role.max}`));
       }
 
-      if (dateState === "not-open") {
-        pills.push(pill("gray", `Opens ${formatDate(role.applyStart)}`));
-      } else if (role.applyEnd) {
-        pills.push(pill("gray", `Ends ${formatDate(role.applyEnd)}`));
-      }
-
       if (alreadyApplied) {
         pills.push(pill("green", "Already Applied"));
+      }
+
+      const dateText = dateState === "not-open"
+        ? `Opens ${formatDate(role.applyStart)}`
+        : role.applyEnd
+          ? `Ends ${formatDate(role.applyEnd)}`
+          : "";
+
+      const headerChildren = [
+        el("div", {
+          className: "role-head-main",
+          children: [
+            el("div", { className: "role-group", text: role.groupName }),
+            el("h3", { className: "role-name", text: role.name }),
+          ],
+        }),
+      ];
+
+      if (dateText) {
+        headerChildren.push(el("span", {
+          className: `role-date${dateState === "not-open" ? " not-open" : ""}`,
+          text: dateText,
+        }));
       }
 
       return el("article", {
         className: `role available${role.type === "audition" ? " audition" : ""}${alreadyApplied ? " selected" : ""}${full ? " full" : ""}${dateState === "not-open" ? " not-open" : ""}`,
         dataset: inactive ? {} : { roleId: role.id },
         children: [
-          el("div", {
-            children: [
-              el("div", { className: "role-group", text: role.groupName }),
-              el("h3", { className: "role-name", text: role.name }),
-            ],
-          }),
+          el("div", { className: "role-head", children: headerChildren }),
           el("p", { className: "role-desc", text: role.description }),
           el("div", { className: "pill-row", children: pills }),
         ],
@@ -891,8 +941,11 @@
             el("h3", { className: "role-name", text: role.name }),
           ],
         }),
-        el("div", { className: "pill-row", children: [statusPill(application)] }),
       ];
+
+      if (application.status !== "rejected") {
+        children.push(el("div", { className: "pill-row", children: [statusPill(application)] }));
+      }
 
       if (application.status === "audition") {
         children.push(
