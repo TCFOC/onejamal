@@ -107,6 +107,10 @@
     .dialog-body{padding:1.2rem}
     .dialog-title{margin:0 0 .45rem;color:var(--brand-start);font-size:1.25rem;line-height:1.25}
     .dialog-message{margin:0;color:#333;font-size:.95rem;white-space:pre-line}
+    .dialog-input-wrap{margin-top:1rem}
+    .dialog-input-label{display:block;margin-bottom:.35rem;color:#333;font-size:.9rem;font-weight:700}
+    .dialog-input{width:100%;border:1px solid #ccc;border-radius:10px;padding:.72rem .78rem;outline:none;background:#fff;color:var(--text)}
+    .dialog-input:focus{border-color:var(--brand-end);box-shadow:0 0 0 4px rgba(45,104,242,.12)}
     .dialog-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 1.2rem 1.2rem}
     .dialog-actions.only-confirm{grid-template-columns:1fr}
     .dialog-btn{display:flex;align-items:center;justify-content:center;min-height:42px;border:0;border-radius:10px;padding:.7rem .9rem;font-weight:700}
@@ -217,6 +221,10 @@
       <div class="dialog-body">
         <h2 id="dialogTitle" class="dialog-title">Confirm</h2>
         <p id="dialogMessage" class="dialog-message"></p>
+        <div id="dialogInputWrap" class="dialog-input-wrap hidden">
+          <label id="dialogInputLabel" class="dialog-input-label" for="dialogInput">Input</label>
+          <input id="dialogInput" class="dialog-input" type="text" />
+        </div>
       </div>
       <div id="dialogActions" class="dialog-actions">
         <button id="dialogCancel" class="dialog-btn cancel" type="button">Cancel</button>
@@ -295,6 +303,9 @@
       dialogOverlay: $("dialogOverlay"),
       dialogTitle: $("dialogTitle"),
       dialogMessage: $("dialogMessage"),
+      dialogInputWrap: $("dialogInputWrap"),
+      dialogInputLabel: $("dialogInputLabel"),
+      dialogInput: $("dialogInput"),
       dialogActions: $("dialogActions"),
       dialogCancel: $("dialogCancel"),
       dialogConfirm: $("dialogConfirm")
@@ -329,7 +340,11 @@
       confirmText = "Confirm",
       cancelText = "Cancel",
       danger = false,
-      hideCancel = false
+      hideCancel = false,
+      input = false,
+      inputLabel = "Input",
+      inputType = "text",
+      inputValue = ""
     } = {}) {
       return new Promise(resolve => {
         dom.dialogTitle.textContent = title;
@@ -339,15 +354,26 @@
         dom.dialogConfirm.classList.toggle("danger", danger);
         dom.dialogActions.classList.toggle("only-confirm", hideCancel);
         dom.dialogCancel.style.display = hideCancel ? "none" : "flex";
+
+        dom.dialogInputWrap.classList.toggle("hidden", !input);
+        dom.dialogInputLabel.textContent = inputLabel;
+        dom.dialogInput.type = inputType;
+        dom.dialogInput.value = inputValue || "";
+
         dom.dialogOverlay.classList.remove("hidden");
 
+        if (input) {
+          setTimeout(() => dom.dialogInput.focus(), 40);
+        }
+
         const close = result => {
+          const value = dom.dialogInput.value;
           dom.dialogOverlay.classList.add("hidden");
           dom.dialogConfirm.removeEventListener("click", onConfirm);
           dom.dialogCancel.removeEventListener("click", onCancel);
           dom.dialogOverlay.removeEventListener("click", onOverlay);
           document.removeEventListener("keydown", onKey);
-          resolve(result);
+          resolve(input && result ? value : result);
         };
 
         const onConfirm = () => close(true);
@@ -357,6 +383,7 @@
         };
         const onKey = e => {
           if (e.key === "Escape") close(false);
+          if (e.key === "Enter" && input) close(true);
         };
 
         dom.dialogConfirm.addEventListener("click", onConfirm);
@@ -368,6 +395,7 @@
 
     const confirmDialog = (title, message, options = {}) => dialogBox({ title, message, ...options });
     const alertDialog = (title, message) => dialogBox({ title, message, confirmText: "OK", hideCancel: true });
+    const inputDialog = (title, message, options = {}) => dialogBox({ title, message, input: true, ...options });
 
     function allRoles() {
       return ROLE_GROUPS.flatMap(g =>
@@ -406,6 +434,30 @@
         declined: "Declined",
         cancelled: "Cancelled"
       }[s] || s || "Unknown";
+    }
+
+    function toDatetimeLocalValue(value) {
+      if (!value) return "";
+
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return "";
+
+      const pad = n => String(n).padStart(2, "0");
+      return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+    }
+
+    function formatAuditionTime(value) {
+      if (!value) return "";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return value;
+
+      return date.toLocaleString("en-US", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
     }
 
     function statusPill(s) {
@@ -607,6 +659,16 @@
       const s = a.status || "unknown";
       const buttons = [];
 
+      if (a.roleType === "audition") {
+        buttons.push(
+          el("button", {
+            className: "button orange",
+            text: "Set Audition Time",
+            dataset: { action: "setAuditionTime", id: a.id }
+          })
+        );
+      }
+
       if (s === "audition") {
         buttons.push(
           el("button", { className: "button green", text: "Pass", dataset: { action: "setStatus", id: a.id, status: "passed" } }),
@@ -646,7 +708,7 @@
                   el("div", { className: "kicker", text: `${group} · ${a.userEmail}` }),
                   el("h3", { className: "item-title", text: title }),
                   el("p", { className: "item-sub", text: name }),
-                  a.auditionDate ? el("p", { className: "item-sub", text: `Audition: ${a.auditionDate}` }) : ""
+                  a.auditionDate ? el("p", { className: "item-sub", text: `Audition: ${formatAuditionTime(a.auditionDate)}` }) : ""
                 ].filter(Boolean)
               }),
               statusPill(s)
@@ -769,6 +831,42 @@
       );
     }
 
+    async function setAuditionTime(id) {
+      const a = state.applications.find(x => x.id === id);
+      if (!a) return;
+
+      const currentValue = toDatetimeLocalValue(a.auditionDate);
+
+      const value = await inputDialog(
+        "Set Audition Time",
+        `Enter audition date/time for ${a.userEmail}'s ${roleLabel(a.roleId)}.`,
+        {
+          inputLabel: "Audition Date & Time",
+          inputType: "datetime-local",
+          inputValue: currentValue,
+          confirmText: "Save Time"
+        }
+      );
+
+      if (value === false) return;
+
+      if (!value) {
+        await alertDialog("Missing Time", "Please enter an audition date and time.");
+        return;
+      }
+
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) {
+        await alertDialog("Invalid Time", "The audition date/time is invalid.");
+        return;
+      }
+
+      await updateDoc(doc(db, ROLES_COLLECTION, id), {
+        auditionDate: date.toISOString(),
+        updatedAt: serverTimestamp()
+      });
+    }
+
     async function updateApplicationStatus(id, status) {
       const a = state.applications.find(x => x.id === id);
       if (!a) return;
@@ -885,6 +983,12 @@
       if (b.dataset.action === "setStatus") {
         updateApplicationStatus(b.dataset.id, b.dataset.status).catch(err =>
           alertDialog("Could not update role", err.message)
+        );
+      }
+
+      if (b.dataset.action === "setAuditionTime") {
+        setAuditionTime(b.dataset.id).catch(err =>
+          alertDialog("Could not set audition time", err.message)
         );
       }
     });
