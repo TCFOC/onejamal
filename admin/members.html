@@ -130,13 +130,9 @@
     const ALLOWED_EMAIL = "admin@tcfthailand.com";
     const USERS_COLLECTION = "users";
     const ROLES_COLLECTION = "roles";
-    const ROLE_JSON_PATH = "roles.json";
+    const ROLE_JSON_PATH = "https://tcfthailand.com/onejamal/data/roles.json";
     let ROLE_GROUPS = [];
-    const FALLBACK_ROLE_GROUPS = [
-      {id:"operations",name:"Operations Group",roles:[{id:"speaker",name:"Speaker",type:"audition"},{id:"registration",name:"Registration Desk",type:"direct",max:7}]},
-      {id:"creative-contest",name:"Creative Contest Group",roles:[{id:"cc-booth-guide",name:"Booth Guide",type:"direct",max:6},{id:"cc-stage-assistant",name:"Stage Assistant",type:"audition"}]},
-      {id:"exam",name:"Exam Group",roles:[{id:"grader",name:"Exam Grader",type:"audition"},{id:"room-proctor",name:"Room Proctor",type:"direct",max:10}]}
-    ];
+    const FALLBACK_ROLE_GROUPS = [];
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
