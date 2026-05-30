@@ -358,7 +358,8 @@
       input = false,
       inputLabel = "Input",
       inputType = "text",
-      inputValue = ""
+      inputValue = "",
+      placeholder = "",
     } = {}) {
       return new Promise(resolve => {
         dom.dialogTitle.textContent = title;
@@ -373,6 +374,7 @@
         dom.dialogInputLabel.textContent = inputLabel;
         dom.dialogInput.type = inputType;
         dom.dialogInput.value = inputValue || "";
+        dom.dialogInput.placeholder = placeholder;
 
         dom.dialogOverlay.classList.remove("hidden");
 
@@ -858,7 +860,8 @@
           inputLabel: "Audition Date & Time",
           inputType: "text",
           inputValue: currentValue,
-          confirmText: "Save Time"
+          confirmText: "Save Time",
+          placeholder: "23 April 2023 16:00"
         }
       );
 
@@ -868,15 +871,9 @@
         await alertDialog("Missing Time", "Please enter an audition date and time.");
         return;
       }
-
-      const date = new Date(value);
-      if (Number.isNaN(date.getTime())) {
-        await alertDialog("Invalid Time", "The audition date/time is invalid.");
-        return;
-      }
-
+      
       await updateDoc(doc(db, ROLES_COLLECTION, id), {
-        auditionDate: date.toISOString(),
+        auditionDate: value,
         updatedAt: serverTimestamp()
       });
     }
