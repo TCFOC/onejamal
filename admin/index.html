@@ -19,280 +19,90 @@
   --shadow:0 10px 24px rgba(0,0,0,.06);--shadow-strong:0 18px 45px rgba(0,0,0,.18);
   --orange:#ff9100;--pink:#fa5ca8;
 }
-
 *{box-sizing:border-box}
-
-html{
-  font-size:16px;
-  height:100%;
-  overflow:hidden;
-}
-
-body{
-  margin:0;
-  height:100%;
-  background:var(--bg);
-  color:var(--text);
-  font-family:"IBM Plex Sans Thai",system-ui,sans-serif;
-  line-height:1.6;
-  overflow:hidden;
-}
-
+html{font-size:16px}
+body{margin:0;min-height:100svh;background:var(--bg);color:var(--text);font-family:"IBM Plex Sans Thai",system-ui,sans-serif;line-height:1.6}
 button,input{font:inherit}
 button{cursor:pointer}
 
 .topbar{
-  position:sticky;
-  top:0;
-  z-index:20;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:1rem;
-  padding:1rem 1.25rem;
-  color:#fff;
-  background:linear-gradient(135deg,var(--brand-1),var(--brand-2),var(--brand-3),var(--brand-4));
-  box-shadow:0 6px 18px rgba(0,0,0,.12);
-  font-size:1.2rem;
-  font-weight:600;
+  position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:1rem 1.25rem;color:#fff;background:linear-gradient(135deg,var(--brand-1),var(--brand-2),var(--brand-3),var(--brand-4));
+  box-shadow:0 6px 18px rgba(0,0,0,.12);font-size:1.2rem;font-weight:600
 }
-
 .brand{white-space:nowrap}
-
-.top-actions{
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  gap:.6rem;
-  flex-wrap:wrap;
+.top-actions{display:flex;align-items:center;justify-content:flex-end;gap:.6rem;flex-wrap:wrap}
+.topbar-link,.topbar-button{
+  border:0;border-radius:999px;padding:.45rem .75rem;background:rgba(255,255,255,.16);color:#fff;
+  text-decoration:none;font-size:.9rem;font-weight:500
 }
-
-.topbar-button{
-  border:0;
-  border-radius:999px;
-  padding:.45rem .75rem;
-  background:rgba(255,255,255,.16);
-  color:#fff;
-  text-decoration:none;
-  font-size:.9rem;
-  font-weight:500;
-}
-
-.topbar-button:hover{
-  background:rgba(255,255,255,.24);
-}
+.topbar-link:hover,.topbar-button:hover{background:rgba(255,255,255,.24)}
 
 .shell{
   width:min(980px,calc(100% - 24px));
   margin:0 auto;
-  padding:26px 0 36px;
-  max-height:calc(100vh - 70px);
-  overflow:hidden;
+  padding:clamp(70px,10vh,120px) 0 36px;
 }
-
-.hero{
-  margin-bottom:14px;
-}
-
-.hero h1{
-  margin:0;
-  color:var(--brand-start);
-  font-size:clamp(1.55rem,4vw,2.2rem);
-  line-height:1.2;
-}
+.hero{margin-bottom:14px}
+.hero h1{margin:0;color:var(--brand-start);font-size:clamp(1.55rem,4vw,2.2rem);line-height:1.2}
+.hero p{margin:.35rem 0 0;color:var(--muted)}
 
 .card{
-  padding:1rem;
-  border:1px solid var(--border);
-  border-radius:14px;
-  background:var(--card);
-  box-shadow:var(--shadow);
+  padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--card);
+  box-shadow:var(--shadow);animation:fadeUp .28s ease both
 }
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.card-title{margin:0 0 .4rem;color:var(--brand-start);font-size:1.25rem;line-height:1.3}
+.muted{margin:0;color:var(--muted);font-size:.95rem}
 
-.card-title{
-  margin:0 0 .4rem;
-  color:var(--brand-start);
-  font-size:1.25rem;
-  line-height:1.3;
-}
-
-.admin-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
-  margin-top:14px;
-}
-
+.admin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
 .admin-card{
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  gap:1rem;
-  min-height:190px;
-  border:1px solid var(--border);
-  border-radius:16px;
-  background:#fff;
-  padding:1.1rem;
-  box-shadow:var(--shadow);
-  text-decoration:none;
-  color:var(--text);
+  display:flex;flex-direction:column;justify-content:space-between;gap:1rem;min-height:190px;
+  border:1px solid var(--border);border-radius:16px;background:#fff;padding:1.1rem;
+  box-shadow:var(--shadow);text-decoration:none;color:var(--text);transition:transform .16s ease,box-shadow .16s ease
 }
-
-.admin-card:hover{
-  box-shadow:var(--shadow-strong);
-}
-
-.admin-card h2{
-  margin:0;
-  font-size:1.35rem;
-  line-height:1.25;
-}
-
-.admin-card p{
-  margin:.35rem 0 0;
-  color:var(--muted);
-}
-
-.admin-card.orange{
-  border-left:7px solid var(--orange);
-}
-
-.admin-card.pink{
-  border-left:7px solid var(--pink);
-}
-
+.admin-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-strong)}
+.admin-card h2{margin:0;font-size:1.35rem;line-height:1.25}
+.admin-card p{margin:.35rem 0 0;color:var(--muted)}
+.admin-card.orange{border-left:7px solid var(--orange)}
+.admin-card.pink{border-left:7px solid var(--pink)}
 .admin-button{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:46px;
-  border:0;
-  border-radius:10px;
-  padding:.75rem .9rem;
-  color:#fff;
-  text-align:center;
-  text-decoration:none;
-  font-weight:700;
+  display:inline-flex;align-items:center;justify-content:center;min-height:46px;border:0;border-radius:10px;
+  padding:.75rem .9rem;color:#fff;text-align:center;text-decoration:none;font-weight:700
 }
-
-.admin-button.orange{
-  background:var(--orange);
-}
-
-.admin-button.pink{
-  background:var(--pink);
-}
+.admin-button.orange{background:var(--orange)}
+.admin-button.pink{background:var(--pink)}
 
 .login-overlay{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:1rem;
-  background:rgba(0,0,0,.6);
+  position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;background:rgba(0,0,0,.6)
 }
-
 .login-box{
-  width:min(92vw,420px);
-  border:1px solid var(--border);
-  border-radius:18px;
-  background:#fff;
-  box-shadow:var(--shadow-strong);
-  overflow:hidden;
+  width:min(92vw,420px);border:1px solid var(--border);border-radius:18px;background:#fff;
+  box-shadow:var(--shadow-strong);overflow:hidden;animation:popIn .22s ease both
 }
-
-.accent{
-  height:7px;
-  background:linear-gradient(135deg,var(--brand-1),var(--brand-2),var(--brand-3),var(--brand-4));
-}
-
-.box-body{
-  padding:1.35rem;
-}
-
-.box-title{
-  margin:0 0 .35rem;
-  color:var(--brand-start);
-  font-size:1.35rem;
-  line-height:1.25;
-}
-
-.field{
-  display:grid;
-  gap:.35rem;
-  margin-top:.75rem;
-}
-
-.field label{
-  color:#333;
-  font-size:.9rem;
-  font-weight:700;
-}
-
-.input{
-  width:100%;
-  border:1px solid #ccc;
-  border-radius:10px;
-  padding:.72rem .78rem;
-  outline:none;
-  background:#fff;
-  color:var(--text);
-}
-
-.input:focus{
-  border-color:var(--brand-end);
-  box-shadow:0 0 0 4px rgba(45,104,242,.12);
-}
-
+@keyframes popIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.accent{height:7px;background:linear-gradient(135deg,var(--brand-1),var(--brand-2),var(--brand-3),var(--brand-4))}
+.box-body{padding:1.35rem}
+.box-title{margin:0 0 .35rem;color:var(--brand-start);font-size:1.35rem;line-height:1.25}
+.box-text{margin:0 0 1rem;color:var(--muted);font-size:.95rem}
+.field{display:grid;gap:.35rem;margin-top:.75rem}
+.field label{color:#333;font-size:.9rem;font-weight:700}
+.input{width:100%;border:1px solid #ccc;border-radius:10px;padding:.72rem .78rem;outline:none;background:#fff;color:var(--text)}
+.input:focus{border-color:var(--brand-end);box-shadow:0 0 0 4px rgba(45,104,242,.12)}
 .button{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:44px;
-  border:0;
-  border-radius:10px;
-  padding:.75rem .9rem;
-  color:#fff;
-  text-align:center;
-  text-decoration:none;
-  font-weight:700;
+  display:inline-flex;align-items:center;justify-content:center;min-height:44px;border:0;border-radius:10px;padding:.75rem .9rem;
+  color:#fff;text-align:center;text-decoration:none;font-weight:700;transition:transform .16s ease,box-shadow .16s ease,opacity .16s ease
 }
-
-.button.orange{
-  background:var(--orange);
-}
-
-.status-message{
-  min-height:1.35em;
-  margin:.65rem 0 0;
-  color:#d23;
-  font-size:.9rem;
-}
-
-.hidden{
-  display:none!important;
-}
+.button:hover{transform:translateY(-1px);box-shadow:var(--shadow-strong)}
+.button.orange{background:var(--orange)}
+.status-message{min-height:1.35em;margin:.65rem 0 0;color:#d23;font-size:.9rem}
+.hidden{display:none!important}
 
 @media(max-width:720px){
-  html{
-    font-size:15px;
-  }
-
-  .topbar{
-    align-items:flex-start;
-    flex-direction:column;
-    padding:.9rem 1rem;
-  }
-
-  .top-actions{
-    justify-content:flex-start;
-  }
-
-  .admin-grid{
-    grid-template-columns:1fr;
-  }
+  html{font-size:15px}
+  .topbar{align-items:flex-start;flex-direction:column;padding:.9rem 1rem}
+  .top-actions{justify-content:flex-start}
+  .admin-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -314,7 +124,7 @@ button{cursor:pointer}
     <h2 class="card-title">Admin Home</h2>
 
     <div class="admin-grid">
-      <a id="manageTasksBtn" class="admin-card orange" href="https://tcfthailand.com/tstaff/admin/taskmanagement" target="_self">
+      <a id="manageTasksBtn" class="admin-card orange" href="https://tcfthailand.com/tstaff/admin/tasks" target="_self">
         <div>
           <h2>Manage Tasks</h2>
           <p>Create, edit, filter, and track task progress.</p>
@@ -357,12 +167,7 @@ button{cursor:pointer}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {
-  getAuth,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signOut
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDKHyMNxgnUH9zn0HQHDNf98GFphC9rv_4",
@@ -375,12 +180,12 @@ const firebaseConfig = {
 
 const ALLOWED_EMAIL = "admin@tcfthailand.com";
 
+// Change these if your deployed paths are different.
 const MANAGE_TASKS_URL = "https://tcfthailand.com/tstaff/admin/tasks";
 const MANAGE_MEMBERS_URL = "https://tcfthailand.com/tstaff/admin/members";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-
 const $ = id => document.getElementById(id);
 
 const dom = {
@@ -403,15 +208,15 @@ function setLoginStatus(message) {
 }
 
 function showLogin() {
+  dom.app.classList.add("hidden");
   dom.loginOverlay.classList.remove("hidden");
   dom.logoutBtn.classList.add("hidden");
-  dom.app.classList.add("hidden");
 }
 
-function showAdmin() {
+function showAdmin(user) {
+  dom.app.classList.remove("hidden");
   dom.loginOverlay.classList.add("hidden");
   dom.logoutBtn.classList.remove("hidden");
-  dom.app.classList.remove("hidden");
 }
 
 async function login(event) {
@@ -419,7 +224,6 @@ async function login(event) {
 
   const email = dom.loginEmail.value.trim();
   const password = dom.loginPassword.value;
-
   setLoginStatus("");
 
   if (email.toLowerCase() !== ALLOWED_EMAIL) {
@@ -455,7 +259,7 @@ onAuthStateChanged(auth, async user => {
     return;
   }
 
-  showAdmin();
+  showAdmin(user);
 });
 </script>
 </body>
