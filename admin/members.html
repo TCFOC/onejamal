@@ -698,11 +698,11 @@
         if (a.roleType === "audition") {
           buttons.push(
             el("button", { className: "button gray", text: "Unconfirm", dataset: { action: "setStatus", id: a.id, status: "passed" } }),
-            el("button", { className: "button red", text: "Cancel", dataset: { action: "setStatus", id: a.id, status: "cancelled" } })
+            el("button", { className: "button red", text: "Remove", dataset: { action: "setStatus", id: a.id, status: "cancelled" } })
           );
         } else {
           buttons.push(
-            el("button", { className: "button red", text: "Cancel", dataset: { action: "setStatus", id: a.id, status: "cancelled" } })
+            el("button", { className: "button red", text: "Remove", dataset: { action: "setStatus", id: a.id, status: "cancelled" } })
           );
         }
       }
@@ -715,7 +715,7 @@
           );
         } else {
           buttons.push(
-            el("button", { className: "button green", text: "Force Confirm", dataset: { action: "setStatus", id: a.id, status: "confirmed" } })
+            el("button", { className: "button green", text: "Admit", dataset: { action: "setStatus", id: a.id, status: "confirmed" } })
           );
         }
       }
