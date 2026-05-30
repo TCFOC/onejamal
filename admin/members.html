@@ -18,21 +18,114 @@
       --shadow:0 10px 24px rgba(0,0,0,.06);--shadow-strong:0 16px 34px rgba(0,0,0,.10);
       --red:#ef4444;--yellow:#f5c32c;--green:#22c55e;--gray:#64748b;
     }
-    *{box-sizing:border-box}html{font-size:16px}body{margin:0;min-height:100svh;background:var(--bg);color:var(--text);font-family:"IBM Plex Sans Thai",system-ui,sans-serif;line-height:1.6}button,input,select{font:inherit}button{cursor:pointer}
+    *{box-sizing:border-box}
+    html{font-size:16px}
+    body{margin:0;min-height:100svh;background:var(--bg);color:var(--text);font-family:"IBM Plex Sans Thai",system-ui,sans-serif;line-height:1.6}
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+
     .topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.25rem;color:#fff;background:linear-gradient(135deg,var(--brand-1),var(--brand-2),var(--brand-3),var(--brand-4));box-shadow:0 6px 18px rgba(0,0,0,.12);font-size:1.2rem;font-weight:600}
-    .brand{white-space:nowrap}.top-actions{display:flex;align-items:center;justify-content:flex-end;gap:.6rem;flex-wrap:wrap}.topbar-link,.topbar-button{border:0;border-radius:999px;padding:.45rem .75rem;background:rgba(255,255,255,.16);color:#fff;text-decoration:none;font-size:.9rem;font-weight:500}.topbar-link:hover,.topbar-button:hover{background:rgba(255,255,255,.24)}
-    .shell{width:min(1320px,calc(100% - 24px));margin:0 auto;padding:18px 0 32px}.hero{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-bottom:12px}.hero h1{margin:0;color:var(--brand-start);font-size:clamp(1.45rem,4vw,2rem);line-height:1.2}.hero p{margin:.25rem 0 0;color:var(--muted)}
-    .stats{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.stat{display:inline-flex;align-items:center;gap:.35rem;border:1px solid var(--border);border-radius:999px;padding:.38rem .7rem;background:#fff;box-shadow:var(--shadow);font-size:.9rem;font-weight:600;white-space:nowrap}.dot{display:inline-block;width:10px;height:10px;border-radius:999px}.dot.blue{background:var(--brand-end)}.dot.orange{background:var(--brand-4)}.dot.green{background:var(--green)}.dot.gray{background:var(--gray)}
-    .grid{display:grid;grid-template-columns:minmax(320px,.9fr) minmax(0,1.25fr);gap:12px;align-items:start}.card{display:flex;min-height:0;flex-direction:column;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--card);box-shadow:var(--shadow);animation:fadeUp .28s ease both}@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-    .card-title{margin:0 0 .8rem;color:var(--brand-start);font-size:1.2rem;line-height:1.3}.filters{display:grid;gap:8px;margin-bottom:12px}.member-filters{grid-template-columns:1fr 145px}.app-filters{grid-template-columns:1fr 145px 150px 130px}.input,.select{width:100%;border:1px solid #ccc;border-radius:10px;padding:.72rem .78rem;outline:none;background:#fff;color:var(--text)}.input:focus,.select:focus{border-color:var(--brand-end);box-shadow:0 0 0 4px rgba(45,104,242,.12)}
-    .list{display:grid;gap:10px}.item{border:1px solid var(--border);border-left:5px solid transparent;border-radius:14px;background:#fff;padding:.9rem;box-shadow:0 4px 14px rgba(0,0,0,.05)}.item.member{border-left-color:var(--brand-end)}.item.recruit{border-left-color:var(--gray)}.item.audition{border-left-color:var(--brand-4)}.item.passed,.item.confirmed{border-left-color:var(--green)}.item.rejected,.item.declined,.item.cancelled{border-left-color:var(--red)}
-    .item-top{display:flex;justify-content:space-between;gap:.75rem;align-items:flex-start}.kicker{color:var(--muted);font-size:.82rem;font-weight:600}.item-title{margin:.12rem 0 0;color:#111;font-size:1.1rem;line-height:1.25;font-weight:700;overflow-wrap:anywhere}.item-sub{margin:.25rem 0 0;color:#333;font-size:.94rem;overflow-wrap:anywhere}
-    .pill-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.65rem}.pill{display:inline-flex;align-items:center;border:1px solid var(--border);border-radius:999px;padding:.25rem .55rem;background:#fff;color:#333;font-size:.78rem;font-weight:700;line-height:1.2;white-space:nowrap}.pill.blue{border-color:rgba(45,104,242,.18);background:rgba(45,104,242,.08);color:var(--brand-end)}.pill.orange{border-color:#fed7aa;background:#ffedd5;color:#9a3412}.pill.green{border-color:#bbf7d0;background:#dcfce7;color:#166534}.pill.red{border-color:#fecaca;background:#fee2e2;color:#991b1b}.pill.gray{border-color:#cbd5e1;background:#e2e8f0;color:#334155}
-    .controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:.75rem}.app-controls{grid-template-columns:repeat(4,minmax(0,1fr))}.button{display:inline-flex;align-items:center;justify-content:center;min-height:40px;border:0;border-radius:10px;padding:.62rem .75rem;color:#fff;text-align:center;text-decoration:none;font-size:.9rem;font-weight:700;transition:transform .16s ease,box-shadow .16s ease,opacity .16s ease}.button:hover{transform:translateY(-1px);box-shadow:var(--shadow-strong)}.button:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}.button.blue{background:var(--brand-end)}.button.orange{background:var(--brand-4)}.button.green{background:var(--green)}.button.red{background:var(--red)}.button.gray{background:#e5e7eb;color:#111827}
-    .role-overview{margin-bottom:12px}.role-overview-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.mini-role{border:1px solid var(--border);border-radius:12px;background:#fff;padding:.75rem}.mini-role h3{margin:0;font-size:.95rem;line-height:1.25}.mini-role p{margin:.2rem 0 0;color:var(--muted);font-size:.82rem}.empty{border:2px dashed var(--border);border-radius:14px;padding:22px;background:linear-gradient(180deg,#fff,#fafbff);color:var(--muted);text-align:center}
-    .login-overlay{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;background:rgba(0,0,0,.6)}.login-box{width:min(90vw,380px);border-radius:14px;background:#fff;padding:2rem;box-shadow:0 10px 30px rgba(0,0,0,.35);animation:popIn .22s ease both}.login-box h1{margin:0 0 .25rem;color:var(--brand-start);font-size:1.4rem}.login-box p{margin:0 0 1rem;color:var(--muted)}.status-message{min-height:1.35em;margin:.55rem 0 0;color:#d23;font-size:.9rem}.status-message.success{color:#15803d}
-    .dialog-overlay{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:1rem;background:rgba(0,0,0,.42);backdrop-filter:blur(3px)}.dialog{width:min(92vw,420px);border:1px solid var(--border);border-radius:18px;background:#fff;box-shadow:0 18px 45px rgba(0,0,0,.22);overflow:hidden;animation:popIn .2s ease both}@keyframes popIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}.dialog-accent{height:7px;background:linear-gradient(135deg,var(--brand-1),var(--brand-2),var(--brand-3),var(--brand-4))}.dialog-body{padding:1.2rem}.dialog-title{margin:0 0 .45rem;color:var(--brand-start);font-size:1.25rem;line-height:1.25}.dialog-message{margin:0;color:#333;font-size:.95rem;white-space:pre-line}.dialog-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 1.2rem 1.2rem}.dialog-actions.only-confirm{grid-template-columns:1fr}.dialog-btn{display:flex;align-items:center;justify-content:center;min-height:42px;border:0;border-radius:10px;padding:.7rem .9rem;font-weight:700}.dialog-btn.cancel{background:#e5e7eb;color:#111827}.dialog-btn.confirm{background:var(--brand-end);color:#fff}.dialog-btn.danger{background:var(--red);color:#fff}.hidden{display:none!important}
-    @media(max-width:1120px){.grid{grid-template-columns:1fr}.role-overview-list{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:760px){html{font-size:15px}.topbar,.hero{align-items:flex-start;grid-template-columns:1fr;flex-direction:column}.stats{justify-content:flex-start}.member-filters,.app-filters,.controls,.app-controls,.role-overview-list{grid-template-columns:1fr}.item-top{flex-direction:column}}
+    .brand{white-space:nowrap}
+    .top-actions{display:flex;align-items:center;justify-content:flex-end;gap:.6rem;flex-wrap:wrap}
+    .topbar-link,.topbar-button{border:0;border-radius:999px;padding:.45rem .75rem;background:rgba(255,255,255,.16);color:#fff;text-decoration:none;font-size:.9rem;font-weight:500}
+    .topbar-link:hover,.topbar-button:hover{background:rgba(255,255,255,.24)}
+
+    .shell{width:min(1320px,calc(100% - 24px));margin:0 auto;padding:18px 0 32px}
+    .hero{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-bottom:12px}
+    .hero h1{margin:0;color:var(--brand-start);font-size:clamp(1.45rem,4vw,2rem);line-height:1.2}
+    .hero p{margin:.25rem 0 0;color:var(--muted)}
+
+    .stats{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    .stat{display:inline-flex;align-items:center;gap:.35rem;border:1px solid var(--border);border-radius:999px;padding:.38rem .7rem;background:#fff;box-shadow:var(--shadow);font-size:.9rem;font-weight:600;white-space:nowrap}
+    .dot{display:inline-block;width:10px;height:10px;border-radius:999px}
+    .dot.blue{background:var(--brand-end)}
+    .dot.orange{background:var(--brand-4)}
+    .dot.green{background:var(--green)}
+    .dot.gray{background:var(--gray)}
+
+    .grid{display:grid;grid-template-columns:minmax(320px,.9fr) minmax(0,1.25fr);gap:12px;align-items:start}
+    .card{display:flex;min-height:0;flex-direction:column;padding:1rem;border:1px solid var(--border);border-radius:14px;background:var(--card);box-shadow:var(--shadow);animation:fadeUp .28s ease both}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+    .card-title{margin:0 0 .8rem;color:var(--brand-start);font-size:1.2rem;line-height:1.3}
+    .filters{display:grid;gap:8px;margin-bottom:12px}
+    .member-filters{grid-template-columns:1fr 145px}
+    .app-filters{grid-template-columns:1fr 145px 150px 130px}
+    .input,.select{width:100%;border:1px solid #ccc;border-radius:10px;padding:.72rem .78rem;outline:none;background:#fff;color:var(--text)}
+    .input:focus,.select:focus{border-color:var(--brand-end);box-shadow:0 0 0 4px rgba(45,104,242,.12)}
+
+    .list{display:grid;gap:10px}
+    .item{border:1px solid var(--border);border-left:5px solid transparent;border-radius:14px;background:#fff;padding:.9rem;box-shadow:0 4px 14px rgba(0,0,0,.05)}
+    .item.member{border-left-color:var(--brand-end)}
+    .item.recruit{border-left-color:var(--gray)}
+    .item.audition{border-left-color:var(--brand-4)}
+    .item.passed,.item.confirmed{border-left-color:var(--green)}
+    .item.rejected,.item.declined,.item.cancelled{border-left-color:var(--red)}
+
+    .item-top{display:flex;justify-content:space-between;gap:.75rem;align-items:flex-start}
+    .kicker{color:var(--muted);font-size:.82rem;font-weight:600}
+    .item-title{margin:.12rem 0 0;color:#111;font-size:1.1rem;line-height:1.25;font-weight:700;overflow-wrap:anywhere}
+    .item-sub{margin:.25rem 0 0;color:#333;font-size:.94rem;overflow-wrap:anywhere}
+
+    .pill-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.65rem}
+    .pill{display:inline-flex;align-items:center;border:1px solid var(--border);border-radius:999px;padding:.25rem .55rem;background:#fff;color:#333;font-size:.78rem;font-weight:700;line-height:1.2;white-space:nowrap}
+    .pill.blue{border-color:rgba(45,104,242,.18);background:rgba(45,104,242,.08);color:var(--brand-end)}
+    .pill.orange{border-color:#fed7aa;background:#ffedd5;color:#9a3412}
+    .pill.green{border-color:#bbf7d0;background:#dcfce7;color:#166534}
+    .pill.red{border-color:#fecaca;background:#fee2e2;color:#991b1b}
+    .pill.gray{border-color:#cbd5e1;background:#e2e8f0;color:#334155}
+
+    .controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:.75rem}
+    .app-controls{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .button{display:inline-flex;align-items:center;justify-content:center;min-height:40px;border:0;border-radius:10px;padding:.62rem .75rem;color:#fff;text-align:center;text-decoration:none;font-size:.9rem;font-weight:700;transition:transform .16s ease,box-shadow .16s ease,opacity .16s ease}
+    .button:hover{transform:translateY(-1px);box-shadow:var(--shadow-strong)}
+    .button:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+    .button.blue{background:var(--brand-end)}
+    .button.orange{background:var(--brand-4)}
+    .button.green{background:var(--green)}
+    .button.red{background:var(--red)}
+    .button.gray{background:#e5e7eb;color:#111827}
+
+    .role-overview{margin-bottom:12px}
+    .role-overview-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+    .mini-role{border:1px solid var(--border);border-radius:12px;background:#fff;padding:.75rem}
+    .mini-role h3{margin:0;font-size:.95rem;line-height:1.25}
+    .mini-role p{margin:.2rem 0 0;color:var(--muted);font-size:.82rem}
+    .empty{border:2px dashed var(--border);border-radius:14px;padding:22px;background:linear-gradient(180deg,#fff,#fafbff);color:var(--muted);text-align:center}
+
+    .login-overlay{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;background:rgba(0,0,0,.6)}
+    .login-box{width:min(90vw,380px);border-radius:14px;background:#fff;padding:2rem;box-shadow:0 10px 30px rgba(0,0,0,.35);animation:popIn .22s ease both}
+    .login-box h1{margin:0 0 .25rem;color:var(--brand-start);font-size:1.4rem}
+    .login-box p{margin:0 0 1rem;color:var(--muted)}
+    .status-message{min-height:1.35em;margin:.55rem 0 0;color:#d23;font-size:.9rem}
+    .status-message.success{color:#15803d}
+
+    .dialog-overlay{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:1rem;background:rgba(0,0,0,.42);backdrop-filter:blur(3px)}
+    .dialog{width:min(92vw,420px);border:1px solid var(--border);border-radius:18px;background:#fff;box-shadow:0 18px 45px rgba(0,0,0,.22);overflow:hidden;animation:popIn .2s ease both}
+    @keyframes popIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+    .dialog-accent{height:7px;background:linear-gradient(135deg,var(--brand-1),var(--brand-2),var(--brand-3),var(--brand-4))}
+    .dialog-body{padding:1.2rem}
+    .dialog-title{margin:0 0 .45rem;color:var(--brand-start);font-size:1.25rem;line-height:1.25}
+    .dialog-message{margin:0;color:#333;font-size:.95rem;white-space:pre-line}
+    .dialog-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 1.2rem 1.2rem}
+    .dialog-actions.only-confirm{grid-template-columns:1fr}
+    .dialog-btn{display:flex;align-items:center;justify-content:center;min-height:42px;border:0;border-radius:10px;padding:.7rem .9rem;font-weight:700}
+    .dialog-btn.cancel{background:#e5e7eb;color:#111827}
+    .dialog-btn.confirm{background:var(--brand-end);color:#fff}
+    .dialog-btn.danger{background:var(--red);color:#fff}
+    .hidden{display:none!important}
+
+    @media(max-width:1120px){
+      .grid{grid-template-columns:1fr}
+      .role-overview-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media(max-width:760px){
+      html{font-size:15px}
+      .topbar,.hero{align-items:flex-start;grid-template-columns:1fr;flex-direction:column}
+      .stats{justify-content:flex-start}
+      .member-filters,.app-filters,.controls,.app-controls,.role-overview-list{grid-template-columns:1fr}
+      .item-top{flex-direction:column}
+    }
   </style>
 </head>
 
@@ -87,10 +180,18 @@
             <select id="roleFilter" class="select"><option value="">All Roles</option></select>
             <select id="statusFilter" class="select">
               <option value="">All Statuses</option>
-              <option value="audition">Audition</option><option value="passed">Passed</option><option value="confirmed">Confirmed</option>
-              <option value="rejected">Rejected</option><option value="declined">Declined</option><option value="cancelled">Cancelled</option>
+              <option value="audition">Audition</option>
+              <option value="passed">Passed</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="rejected">Rejected</option>
+              <option value="declined">Declined</option>
+              <option value="cancelled">Cancelled</option>
             </select>
-            <select id="typeFilter" class="select"><option value="">All Types</option><option value="audition">Audition</option><option value="direct">Direct</option></select>
+            <select id="typeFilter" class="select">
+              <option value="">All Types</option>
+              <option value="audition">Audition</option>
+              <option value="direct">Direct</option>
+            </select>
           </div>
           <div id="applicationList" class="list"><div class="empty">Loading applications...</div></div>
         </section>
@@ -113,85 +214,703 @@
   <section id="dialogOverlay" class="dialog-overlay hidden" aria-label="Confirmation dialog">
     <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
       <div class="dialog-accent"></div>
-      <div class="dialog-body"><h2 id="dialogTitle" class="dialog-title">Confirm</h2><p id="dialogMessage" class="dialog-message"></p></div>
-      <div id="dialogActions" class="dialog-actions"><button id="dialogCancel" class="dialog-btn cancel" type="button">Cancel</button><button id="dialogConfirm" class="dialog-btn confirm" type="button">Confirm</button></div>
+      <div class="dialog-body">
+        <h2 id="dialogTitle" class="dialog-title">Confirm</h2>
+        <p id="dialogMessage" class="dialog-message"></p>
+      </div>
+      <div id="dialogActions" class="dialog-actions">
+        <button id="dialogCancel" class="dialog-btn cancel" type="button">Cancel</button>
+        <button id="dialogConfirm" class="dialog-btn confirm" type="button">Confirm</button>
+      </div>
     </div>
   </section>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { collection, doc, getFirestore, onSnapshot, serverTimestamp, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import {
+      collection,
+      deleteDoc,
+      deleteField,
+      doc,
+      getDocs,
+      getFirestore,
+      onSnapshot,
+      query,
+      serverTimestamp,
+      setDoc,
+      updateDoc,
+      where
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyDKHyMNxgnUH9zn0HQHDNf98GFphC9rv_4", authDomain: "tstaff-tcf.firebaseapp.com", projectId: "tstaff-tcf",
-      storageBucket: "tstaff-tcf.firebasestorage.app", messagingSenderId: "1038965947691", appId: "1:1038965947691:web:8a2f21a6424b82c14ad96e"
+      apiKey: "AIzaSyDKHyMNxgnUH9zn0HQHDNf98GFphC9rv_4",
+      authDomain: "tstaff-tcf.firebaseapp.com",
+      projectId: "tstaff-tcf",
+      storageBucket: "tstaff-tcf.firebasestorage.app",
+      messagingSenderId: "1038965947691",
+      appId: "1:1038965947691:web:8a2f21a6424b82c14ad96e"
     };
 
     const ALLOWED_EMAIL = "admin@tcfthailand.com";
     const USERS_COLLECTION = "users";
     const ROLES_COLLECTION = "roles";
     const ROLE_JSON_PATH = "https://tcfthailand.com/onejamal/data/roles.json";
+
     let ROLE_GROUPS = [];
     const FALLBACK_ROLE_GROUPS = [];
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
+
     const $ = (id) => document.getElementById(id);
+
     const dom = {
-      app:$("app"),loginOverlay:$("loginOverlay"),loginForm:$("loginForm"),loginEmail:$("loginEmail"),loginPassword:$("loginPassword"),loginStatus:$("loginStatus"),logoutBtn:$("logoutBtn"),adminSubtext:$("adminSubtext"),
-      memberSearch:$("memberSearch"),memberFilter:$("memberFilter"),memberList:$("memberList"),applicationSearch:$("applicationSearch"),roleFilter:$("roleFilter"),statusFilter:$("statusFilter"),typeFilter:$("typeFilter"),applicationList:$("applicationList"),roleOverview:$("roleOverview"),
-      memberCount:$("memberCount"),recruitCount:$("recruitCount"),auditionCount:$("auditionCount"),confirmedCount:$("confirmedCount"),dialogOverlay:$("dialogOverlay"),dialogTitle:$("dialogTitle"),dialogMessage:$("dialogMessage"),dialogActions:$("dialogActions"),dialogCancel:$("dialogCancel"),dialogConfirm:$("dialogConfirm")
+      app: $("app"),
+      loginOverlay: $("loginOverlay"),
+      loginForm: $("loginForm"),
+      loginEmail: $("loginEmail"),
+      loginPassword: $("loginPassword"),
+      loginStatus: $("loginStatus"),
+      logoutBtn: $("logoutBtn"),
+      adminSubtext: $("adminSubtext"),
+
+      memberSearch: $("memberSearch"),
+      memberFilter: $("memberFilter"),
+      memberList: $("memberList"),
+
+      applicationSearch: $("applicationSearch"),
+      roleFilter: $("roleFilter"),
+      statusFilter: $("statusFilter"),
+      typeFilter: $("typeFilter"),
+      applicationList: $("applicationList"),
+      roleOverview: $("roleOverview"),
+
+      memberCount: $("memberCount"),
+      recruitCount: $("recruitCount"),
+      auditionCount: $("auditionCount"),
+      confirmedCount: $("confirmedCount"),
+
+      dialogOverlay: $("dialogOverlay"),
+      dialogTitle: $("dialogTitle"),
+      dialogMessage: $("dialogMessage"),
+      dialogActions: $("dialogActions"),
+      dialogCancel: $("dialogCancel"),
+      dialogConfirm: $("dialogConfirm")
     };
-    const state = { users:[], applications:[], unsubscribeUsers:null, unsubscribeApplications:null };
 
-    function el(tag,o={}){const x=document.createElement(tag);if(o.className)x.className=o.className;if(o.text!=null)x.textContent=o.text;if(o.children)x.append(...o.children);if(o.dataset)Object.assign(x.dataset,o.dataset);if(o.value!=null)x.value=o.value;if(o.style)x.setAttribute("style",o.style);return x}
-    function setStatus(element,message,type="error"){element.textContent=message;element.classList.toggle("success",type==="success")}
-    function dialogBox({title="Confirm",message="",confirmText="Confirm",cancelText="Cancel",danger=false,hideCancel=false}={}){return new Promise(resolve=>{dom.dialogTitle.textContent=title;dom.dialogMessage.textContent=message;dom.dialogConfirm.textContent=confirmText;dom.dialogCancel.textContent=cancelText;dom.dialogConfirm.classList.toggle("danger",danger);dom.dialogActions.classList.toggle("only-confirm",hideCancel);dom.dialogCancel.style.display=hideCancel?"none":"flex";dom.dialogOverlay.classList.remove("hidden");const close=r=>{dom.dialogOverlay.classList.add("hidden");dom.dialogConfirm.removeEventListener("click",onConfirm);dom.dialogCancel.removeEventListener("click",onCancel);dom.dialogOverlay.removeEventListener("click",onOverlay);document.removeEventListener("keydown",onKey);resolve(r)};const onConfirm=()=>close(true),onCancel=()=>close(false),onOverlay=e=>{if(e.target===dom.dialogOverlay)close(false)},onKey=e=>{if(e.key==="Escape")close(false)};dom.dialogConfirm.addEventListener("click",onConfirm);dom.dialogCancel.addEventListener("click",onCancel);dom.dialogOverlay.addEventListener("click",onOverlay);document.addEventListener("keydown",onKey)})}
-    const confirmDialog=(title,message,options={})=>dialogBox({title,message,...options});
-    const alertDialog=(title,message)=>dialogBox({title,message,confirmText:"OK",hideCancel:true});
+    const state = {
+      users: [],
+      applications: [],
+      unsubscribeUsers: null,
+      unsubscribeApplications: null
+    };
 
-    function allRoles(){return ROLE_GROUPS.flatMap(g=>g.roles.map(r=>({...r,groupId:g.id,groupName:g.name})))}
-    function getRole(roleId){return allRoles().find(r=>r.id===roleId)||null}
-    function getUser(email){return state.users.find(u=>u.email===email)||null}
-    function roleLabel(roleId){const r=getRole(roleId);return r?r.name:(roleId||"-")}
-    function groupLabel(roleId,fallback=""){const r=getRole(roleId);return r?r.groupName:(fallback||"-")}
-    function statusLabel(s){return {audition:"Audition",passed:"Passed",confirmed:"Confirmed",rejected:"Rejected",declined:"Declined",cancelled:"Cancelled"}[s]||s||"Unknown"}
-    function statusPill(s){const c={audition:"orange",passed:"green",confirmed:"green",rejected:"red",declined:"gray",cancelled:"red"};return el("span",{className:`pill ${c[s]||"gray"}`,text:statusLabel(s)})}
-    function typePill(t){return el("span",{className:`pill ${t==="audition"?"orange":"blue"}`,text:t==="audition"?"Audition":"Direct"})}
-    function memberPill(m){return el("span",{className:`pill ${m?"blue":"gray"}`,text:m?"Member":"Recruit"})}
-    function departmentOptions(selected=""){const opts=[el("option",{text:"No Department",value:""}),...allRoles().map(r=>el("option",{text:`${r.groupName} · ${r.name}`,value:r.id}))];opts.forEach(o=>{if(o.value===selected)o.selected=true});return opts}
-    function showApp(){dom.app.classList.remove("hidden");dom.loginOverlay.classList.add("hidden");dom.logoutBtn.classList.remove("hidden")}
-    function showLogin(){dom.app.classList.add("hidden");dom.loginOverlay.classList.remove("hidden");dom.logoutBtn.classList.add("hidden")}
-    function updateStats(){const members=state.users.filter(u=>!!u.member).length,recruits=state.users.length-members,auditions=state.applications.filter(a=>a.status==="audition").length,confirmed=state.applications.filter(a=>a.status==="confirmed").length;dom.memberCount.textContent=members;dom.recruitCount.textContent=recruits;dom.auditionCount.textContent=auditions;dom.confirmedCount.textContent=confirmed;dom.adminSubtext.textContent=`${state.users.length} users and ${state.applications.length} role records loaded.`}
-    async function loadRoleGroups(){try{const res=await fetch(`${ROLE_JSON_PATH}?t=${Date.now()}`);if(!res.ok)throw new Error(`roles.json returned ${res.status}`);const data=await res.json();if(!Array.isArray(data))throw new Error("roles.json must contain an array.");ROLE_GROUPS=data}catch(e){console.warn("Using fallback roles:",e);ROLE_GROUPS=FALLBACK_ROLE_GROUPS}populateRoleFilter()}
-    function populateRoleFilter(){dom.roleFilter.replaceChildren(el("option",{text:"All Roles",value:""}),...allRoles().map(r=>el("option",{text:`${r.groupName} · ${r.name}`,value:r.id})))}
+    function el(tag, o = {}) {
+      const x = document.createElement(tag);
+      if (o.className) x.className = o.className;
+      if (o.text != null) x.textContent = o.text;
+      if (o.children) x.append(...o.children);
+      if (o.dataset) Object.assign(x.dataset, o.dataset);
+      if (o.value != null) x.value = o.value;
+      if (o.style) x.setAttribute("style", o.style);
+      return x;
+    }
 
-    function filteredUsers(){const q=dom.memberSearch.value.trim().toLowerCase(),f=dom.memberFilter.value;return state.users.filter(u=>(!q||String(u.name||"").toLowerCase().includes(q)||String(u.email||"").toLowerCase().includes(q))&&(!f||(f==="member"&&!!u.member)||(f==="recruit"&&!u.member))).sort((a,b)=>String(a.name||a.email).localeCompare(String(b.name||b.email)))}
-    function renderMemberCard(u){const isMember=!!u.member;const select=el("select",{className:"select",dataset:{action:"departmentSelect",email:u.email},children:departmentOptions(u.department||"")});return el("article",{className:`item ${isMember?"member":"recruit"}`,children:[el("div",{className:"item-top",children:[el("div",{children:[el("div",{className:"kicker",text:u.email}),el("h3",{className:"item-title",text:u.name||u.email}),el("p",{className:"item-sub",text:`Department / Role: ${roleLabel(u.department)}`})]}),memberPill(isMember)]}),el("div",{className:"pill-row",children:[el("span",{className:"pill gray",text:u.id})]}),el("div",{style:"margin-top:.75rem;",children:[select]}),el("div",{className:"controls",children:[el("button",{className:`button ${isMember?"gray":"blue"}`,text:isMember?"Make Recruit":"Make Member",dataset:{action:"toggleMember",email:u.email}}),el("button",{className:"button blue",text:"Save Role",dataset:{action:"saveDepartment",email:u.email}})]})]})}
-    function renderMembers(){const users=filteredUsers();dom.memberList.replaceChildren(...(users.length?users.map(renderMemberCard):[el("div",{className:"empty",text:"No users match the current filters."})]))}
+    function setStatus(element, message, type = "error") {
+      element.textContent = message;
+      element.classList.toggle("success", type === "success");
+    }
 
-    function filteredApplications(){const q=dom.applicationSearch.value.trim().toLowerCase(),role=dom.roleFilter.value,status=dom.statusFilter.value,type=dom.typeFilter.value;return state.applications.filter(a=>{const u=getUser(a.userEmail),r=roleLabel(a.roleId),g=groupLabel(a.roleId,a.groupName);return (!q||String(a.userEmail||"").toLowerCase().includes(q)||String(u?.name||"").toLowerCase().includes(q)||String(r).toLowerCase().includes(q)||String(g).toLowerCase().includes(q))&&(!role||a.roleId===role)&&(!status||a.status===status)&&(!type||a.roleType===type)}).sort((a,b)=>{const order={passed:1,audition:2,confirmed:3,rejected:4,declined:5,cancelled:6};return (order[a.status]||99)-(order[b.status]||99)||String(a.userEmail||"").localeCompare(String(b.userEmail||""))})}
-    function renderApplicationCard(a){const u=getUser(a.userEmail),r=getRole(a.roleId),title=r?.name||a.roleName||a.roleId||"Unknown Role",group=r?.groupName||a.groupName||"Unknown Group",name=u?.name||a.userEmail||"Unknown User",s=a.status||"unknown";const buttons=[];if(s==="audition")buttons.push(el("button",{className:"button green",text:"Pass",dataset:{action:"setStatus",id:a.id,status:"passed"}}),el("button",{className:"button red",text:"Reject",dataset:{action:"setStatus",id:a.id,status:"rejected"}}));if(s==="passed")buttons.push(el("button",{className:"button green",text:"Force Confirm",dataset:{action:"setStatus",id:a.id,status:"confirmed"}}),el("button",{className:"button gray",text:"Set Audition",dataset:{action:"setStatus",id:a.id,status:"audition"}}));if(s==="confirmed")buttons.push(el("button",{className:"button gray",text:"Unconfirm",dataset:{action:"setStatus",id:a.id,status:"passed"}}),el("button",{className:"button red",text:"Cancel",dataset:{action:"setStatus",id:a.id,status:"cancelled"}}));if(["rejected","declined","cancelled"].includes(s))buttons.push(el("button",{className:"button gray",text:"Set Audition",dataset:{action:"setStatus",id:a.id,status:"audition"}}),el("button",{className:"button green",text:"Pass",dataset:{action:"setStatus",id:a.id,status:"passed"}}));return el("article",{className:`item ${s}`,children:[el("div",{className:"item-top",children:[el("div",{children:[el("div",{className:"kicker",text:`${group} · ${a.userEmail}`}),el("h3",{className:"item-title",text:title}),el("p",{className:"item-sub",text:name}),a.auditionDate?el("p",{className:"item-sub",text:`Audition: ${a.auditionDate}`}):""].filter(Boolean)}),statusPill(s)]}),el("div",{className:"pill-row",children:[typePill(a.roleType),el("span",{className:"pill gray",text:a.id})]}),el("div",{className:"controls app-controls",children:buttons})]})}
-    function renderApplications(){const apps=filteredApplications();dom.applicationList.replaceChildren(...(apps.length?apps.map(renderApplicationCard):[el("div",{className:"empty",text:"No role records match the current filters."})]))}
-    function renderRoleOverview(){const roles=allRoles();dom.roleOverview.replaceChildren(...(roles.length?roles.map(r=>{const apps=state.applications.filter(a=>a.roleId===r.id),confirmed=apps.filter(a=>a.status==="confirmed").length,auditions=apps.filter(a=>a.status==="audition").length,passed=apps.filter(a=>a.status==="passed").length;return el("article",{className:"mini-role",children:[el("h3",{text:r.name}),el("p",{text:r.groupName}),el("div",{className:"pill-row",children:[typePill(r.type),el("span",{className:"pill green",text:`${confirmed}${r.max?`/${r.max}`:""} confirmed`}),el("span",{className:"pill orange",text:`${auditions} audition`}),el("span",{className:"pill blue",text:`${passed} passed`})]})]})}):[el("div",{className:"empty",text:"No roles loaded."})]))}
-    function renderAll(){updateStats();renderMembers();renderApplications();renderRoleOverview()}
+    function dialogBox({
+      title = "Confirm",
+      message = "",
+      confirmText = "Confirm",
+      cancelText = "Cancel",
+      danger = false,
+      hideCancel = false
+    } = {}) {
+      return new Promise(resolve => {
+        dom.dialogTitle.textContent = title;
+        dom.dialogMessage.textContent = message;
+        dom.dialogConfirm.textContent = confirmText;
+        dom.dialogCancel.textContent = cancelText;
+        dom.dialogConfirm.classList.toggle("danger", danger);
+        dom.dialogActions.classList.toggle("only-confirm", hideCancel);
+        dom.dialogCancel.style.display = hideCancel ? "none" : "flex";
+        dom.dialogOverlay.classList.remove("hidden");
 
-    async function updateMemberStatus(email){const u=getUser(email);if(!u)return;const next=!Boolean(u.member);const ok=await confirmDialog(next?"Make Member":"Make Recruit",`${next?"Make":"Move"} ${u.name||email} ${next?"a member":"back to recruit"}?`,{confirmText:next?"Make Member":"Make Recruit"});if(!ok)return;await setDoc(doc(db,USERS_COLLECTION,email),{member:next},{merge:true})}
-    async function saveMemberDepartment(email,selectedRole){const u=getUser(email);if(!u)return;const ok=await confirmDialog("Save Role",`Save role for ${u.name||email} as ${roleLabel(selectedRole)}?`,{confirmText:"Save"});if(!ok)return;await setDoc(doc(db,USERS_COLLECTION,email),{department:selectedRole||""},{merge:true})}
-    async function updateApplicationStatus(id,status){const a=state.applications.find(x=>x.id===id);if(!a)return;const ok=await confirmDialog("Update Role Status",`Set ${a.userEmail}'s ${roleLabel(a.roleId)} status to ${statusLabel(status)}?`,{confirmText:"Update",danger:["rejected","cancelled","declined"].includes(status)});if(!ok)return;await updateDoc(doc(db,ROLES_COLLECTION,id),{status,updatedAt:serverTimestamp()});if(status==="confirmed")await setDoc(doc(db,USERS_COLLECTION,a.userEmail),{department:a.roleId,member:true},{merge:true})}
-    function listenData(){if(state.unsubscribeUsers)state.unsubscribeUsers();if(state.unsubscribeApplications)state.unsubscribeApplications();state.unsubscribeUsers=onSnapshot(collection(db,USERS_COLLECTION),snap=>{state.users=snap.docs.map(d=>({id:d.id,email:d.id,...d.data()}));renderAll()});state.unsubscribeApplications=onSnapshot(collection(db,ROLES_COLLECTION),snap=>{state.applications=snap.docs.map(d=>({id:d.id,...d.data()}));renderAll()})}
+        const close = result => {
+          dom.dialogOverlay.classList.add("hidden");
+          dom.dialogConfirm.removeEventListener("click", onConfirm);
+          dom.dialogCancel.removeEventListener("click", onCancel);
+          dom.dialogOverlay.removeEventListener("click", onOverlay);
+          document.removeEventListener("keydown", onKey);
+          resolve(result);
+        };
 
-    async function login(e){e.preventDefault();const email=dom.loginEmail.value.trim(),password=dom.loginPassword.value;setStatus(dom.loginStatus,"");if(email.toLowerCase()!==ALLOWED_EMAIL){setStatus(dom.loginStatus,"Access denied. This account is not authorized.");return}try{await signInWithEmailAndPassword(auth,email,password)}catch(error){console.error(error);setStatus(dom.loginStatus,`Login failed: ${error.message}`)}}
-    async function logout(){if(state.unsubscribeUsers)state.unsubscribeUsers();if(state.unsubscribeApplications)state.unsubscribeApplications();await signOut(auth)}
+        const onConfirm = () => close(true);
+        const onCancel = () => close(false);
+        const onOverlay = e => {
+          if (e.target === dom.dialogOverlay) close(false);
+        };
+        const onKey = e => {
+          if (e.key === "Escape") close(false);
+        };
 
-    dom.loginForm.addEventListener("submit",login);dom.logoutBtn.addEventListener("click",logout);
-    [dom.memberSearch,dom.memberFilter].forEach(c=>{c.addEventListener("input",renderMembers);c.addEventListener("change",renderMembers)});
-    [dom.applicationSearch,dom.roleFilter,dom.statusFilter,dom.typeFilter].forEach(c=>{c.addEventListener("input",renderApplications);c.addEventListener("change",renderApplications)});
-    dom.memberList.addEventListener("click",e=>{const b=e.target.closest("button[data-action]");if(!b)return;const {action,email}=b.dataset;if(action==="toggleMember")updateMemberStatus(email).catch(err=>alertDialog("Could not update member",err.message));if(action==="saveDepartment"){const select=dom.memberList.querySelector(`select[data-email="${CSS.escape(email)}"]`);saveMemberDepartment(email,select?.value||"").catch(err=>alertDialog("Could not save role",err.message))}});
-    dom.applicationList.addEventListener("click",e=>{const b=e.target.closest("button[data-action]");if(!b)return;if(b.dataset.action==="setStatus")updateApplicationStatus(b.dataset.id,b.dataset.status).catch(err=>alertDialog("Could not update role",err.message))});
-    onAuthStateChanged(auth,async user=>{if(!user){showLogin();return}if(user.email?.toLowerCase()!==ALLOWED_EMAIL){setStatus(dom.loginStatus,"Access denied. This account is not authorized.");await signOut(auth);showLogin();return}try{await loadRoleGroups();showApp();listenData()}catch(err){console.error(err);await alertDialog("Could not load admin page",err.message)}});
+        dom.dialogConfirm.addEventListener("click", onConfirm);
+        dom.dialogCancel.addEventListener("click", onCancel);
+        dom.dialogOverlay.addEventListener("click", onOverlay);
+        document.addEventListener("keydown", onKey);
+      });
+    }
+
+    const confirmDialog = (title, message, options = {}) => dialogBox({ title, message, ...options });
+    const alertDialog = (title, message) => dialogBox({ title, message, confirmText: "OK", hideCancel: true });
+
+    function allRoles() {
+      return ROLE_GROUPS.flatMap(g =>
+        g.roles.map(r => ({
+          ...r,
+          groupId: g.id,
+          groupName: g.name
+        }))
+      );
+    }
+
+    function getRole(roleId) {
+      return allRoles().find(r => r.id === roleId) || null;
+    }
+
+    function getUser(email) {
+      return state.users.find(u => u.email === email) || null;
+    }
+
+    function roleLabel(roleId) {
+      const r = getRole(roleId);
+      return r ? r.name : (roleId || "-");
+    }
+
+    function groupLabel(roleId, fallback = "") {
+      const r = getRole(roleId);
+      return r ? r.groupName : (fallback || "-");
+    }
+
+    function statusLabel(s) {
+      return {
+        audition: "Audition",
+        passed: "Passed",
+        confirmed: "Confirmed",
+        rejected: "Rejected",
+        declined: "Declined",
+        cancelled: "Cancelled"
+      }[s] || s || "Unknown";
+    }
+
+    function statusPill(s) {
+      const c = {
+        audition: "orange",
+        passed: "green",
+        confirmed: "green",
+        rejected: "red",
+        declined: "gray",
+        cancelled: "red"
+      };
+
+      return el("span", {
+        className: `pill ${c[s] || "gray"}`,
+        text: statusLabel(s)
+      });
+    }
+
+    function typePill(t) {
+      return el("span", {
+        className: `pill ${t === "audition" ? "orange" : "blue"}`,
+        text: t === "audition" ? "Audition" : "Direct"
+      });
+    }
+
+    function memberPill(m) {
+      return el("span", {
+        className: `pill ${m ? "blue" : "gray"}`,
+        text: m ? "Member" : "Recruit"
+      });
+    }
+
+    function showApp() {
+      dom.app.classList.remove("hidden");
+      dom.loginOverlay.classList.add("hidden");
+      dom.logoutBtn.classList.remove("hidden");
+    }
+
+    function showLogin() {
+      dom.app.classList.add("hidden");
+      dom.loginOverlay.classList.remove("hidden");
+      dom.logoutBtn.classList.add("hidden");
+    }
+
+    function updateStats() {
+      const members = state.users.filter(u => !!u.member).length;
+      const recruits = state.users.length - members;
+      const auditions = state.applications.filter(a => a.status === "audition").length;
+      const confirmed = state.applications.filter(a => a.status === "confirmed").length;
+
+      dom.memberCount.textContent = members;
+      dom.recruitCount.textContent = recruits;
+      dom.auditionCount.textContent = auditions;
+      dom.confirmedCount.textContent = confirmed;
+      dom.adminSubtext.textContent = `${state.users.length} users and ${state.applications.length} role records loaded.`;
+    }
+
+    async function loadRoleGroups() {
+      try {
+        const res = await fetch(`${ROLE_JSON_PATH}?t=${Date.now()}`);
+        if (!res.ok) throw new Error(`roles.json returned ${res.status}`);
+
+        const data = await res.json();
+        if (!Array.isArray(data)) throw new Error("roles.json must contain an array.");
+
+        ROLE_GROUPS = data;
+      } catch (e) {
+        console.warn("Using fallback roles:", e);
+        ROLE_GROUPS = FALLBACK_ROLE_GROUPS;
+      }
+
+      populateRoleFilter();
+    }
+
+    function populateRoleFilter() {
+      dom.roleFilter.replaceChildren(
+        el("option", { text: "All Roles", value: "" }),
+        ...allRoles().map(r => el("option", {
+          text: `${r.groupName} · ${r.name}`,
+          value: r.id
+        }))
+      );
+    }
+
+    function filteredUsers() {
+      const q = dom.memberSearch.value.trim().toLowerCase();
+      const f = dom.memberFilter.value;
+
+      return state.users
+        .filter(u =>
+          (
+            !q ||
+            String(u.name || "").toLowerCase().includes(q) ||
+            String(u.email || "").toLowerCase().includes(q)
+          ) &&
+          (
+            !f ||
+            (f === "member" && !!u.member) ||
+            (f === "recruit" && !u.member)
+          )
+        )
+        .sort((a, b) => String(a.name || a.email).localeCompare(String(b.name || b.email)));
+    }
+
+    function renderMemberCard(u) {
+      const isMember = !!u.member;
+
+      return el("article", {
+        className: `item ${isMember ? "member" : "recruit"}`,
+        children: [
+          el("div", {
+            className: "item-top",
+            children: [
+              el("div", {
+                children: [
+                  el("div", { className: "kicker", text: u.email }),
+                  el("h3", { className: "item-title", text: u.name || u.email }),
+                  el("p", { className: "item-sub", text: `Department / Role: ${roleLabel(u.department)}` })
+                ]
+              }),
+              memberPill(isMember)
+            ]
+          }),
+
+          el("div", {
+            className: "pill-row",
+            children: [
+              el("span", { className: "pill gray", text: u.id })
+            ]
+          }),
+
+          el("div", {
+            className: "controls",
+            children: [
+              el("button", {
+                className: `button ${isMember ? "gray" : "blue"}`,
+                text: isMember ? "Make Recruit" : "Make Member",
+                dataset: { action: "toggleMember", email: u.email }
+              }),
+
+              el("button", {
+                className: "button red",
+                text: "Clear Role",
+                dataset: { action: "clearRole", email: u.email }
+              })
+            ]
+          })
+        ]
+      });
+    }
+
+    function renderMembers() {
+      const users = filteredUsers();
+
+      dom.memberList.replaceChildren(
+        ...(users.length
+          ? users.map(renderMemberCard)
+          : [el("div", { className: "empty", text: "No users match the current filters." })]
+        )
+      );
+    }
+
+    function filteredApplications() {
+      const q = dom.applicationSearch.value.trim().toLowerCase();
+      const role = dom.roleFilter.value;
+      const status = dom.statusFilter.value;
+      const type = dom.typeFilter.value;
+
+      return state.applications
+        .filter(a => {
+          const u = getUser(a.userEmail);
+          const r = roleLabel(a.roleId);
+          const g = groupLabel(a.roleId, a.groupName);
+
+          return (
+            !q ||
+            String(a.userEmail || "").toLowerCase().includes(q) ||
+            String(u?.name || "").toLowerCase().includes(q) ||
+            String(r).toLowerCase().includes(q) ||
+            String(g).toLowerCase().includes(q)
+          ) &&
+          (!role || a.roleId === role) &&
+          (!status || a.status === status) &&
+          (!type || a.roleType === type);
+        })
+        .sort((a, b) => {
+          const order = { passed: 1, audition: 2, confirmed: 3, rejected: 4, declined: 5, cancelled: 6 };
+          return (order[a.status] || 99) - (order[b.status] || 99) ||
+            String(a.userEmail || "").localeCompare(String(b.userEmail || ""));
+        });
+    }
+
+    function renderApplicationCard(a) {
+      const u = getUser(a.userEmail);
+      const r = getRole(a.roleId);
+      const title = r?.name || a.roleName || a.roleId || "Unknown Role";
+      const group = r?.groupName || a.groupName || "Unknown Group";
+      const name = u?.name || a.userEmail || "Unknown User";
+      const s = a.status || "unknown";
+      const buttons = [];
+
+      if (s === "audition") {
+        buttons.push(
+          el("button", { className: "button green", text: "Pass", dataset: { action: "setStatus", id: a.id, status: "passed" } }),
+          el("button", { className: "button red", text: "Reject", dataset: { action: "setStatus", id: a.id, status: "rejected" } })
+        );
+      }
+
+      if (s === "passed") {
+        buttons.push(
+          el("button", { className: "button green", text: "Force Confirm", dataset: { action: "setStatus", id: a.id, status: "confirmed" } }),
+          el("button", { className: "button gray", text: "Set Audition", dataset: { action: "setStatus", id: a.id, status: "audition" } })
+        );
+      }
+
+      if (s === "confirmed") {
+        buttons.push(
+          el("button", { className: "button gray", text: "Unconfirm", dataset: { action: "setStatus", id: a.id, status: "passed" } }),
+          el("button", { className: "button red", text: "Cancel", dataset: { action: "setStatus", id: a.id, status: "cancelled" } })
+        );
+      }
+
+      if (["rejected", "declined", "cancelled"].includes(s)) {
+        buttons.push(
+          el("button", { className: "button gray", text: "Set Audition", dataset: { action: "setStatus", id: a.id, status: "audition" } }),
+          el("button", { className: "button green", text: "Pass", dataset: { action: "setStatus", id: a.id, status: "passed" } })
+        );
+      }
+
+      return el("article", {
+        className: `item ${s}`,
+        children: [
+          el("div", {
+            className: "item-top",
+            children: [
+              el("div", {
+                children: [
+                  el("div", { className: "kicker", text: `${group} · ${a.userEmail}` }),
+                  el("h3", { className: "item-title", text: title }),
+                  el("p", { className: "item-sub", text: name }),
+                  a.auditionDate ? el("p", { className: "item-sub", text: `Audition: ${a.auditionDate}` }) : ""
+                ].filter(Boolean)
+              }),
+              statusPill(s)
+            ]
+          }),
+
+          el("div", {
+            className: "pill-row",
+            children: [
+              typePill(a.roleType),
+              el("span", { className: "pill gray", text: a.id })
+            ]
+          }),
+
+          el("div", { className: "controls app-controls", children: buttons })
+        ]
+      });
+    }
+
+    function renderApplications() {
+      const apps = filteredApplications();
+
+      dom.applicationList.replaceChildren(
+        ...(apps.length
+          ? apps.map(renderApplicationCard)
+          : [el("div", { className: "empty", text: "No role records match the current filters." })]
+        )
+      );
+    }
+
+    function renderRoleOverview() {
+      const roles = allRoles();
+
+      dom.roleOverview.replaceChildren(
+        ...(roles.length
+          ? roles.map(r => {
+              const apps = state.applications.filter(a => a.roleId === r.id);
+              const confirmed = apps.filter(a => a.status === "confirmed").length;
+              const auditions = apps.filter(a => a.status === "audition").length;
+              const passed = apps.filter(a => a.status === "passed").length;
+
+              return el("article", {
+                className: "mini-role",
+                children: [
+                  el("h3", { text: r.name }),
+                  el("p", { text: r.groupName }),
+                  el("div", {
+                    className: "pill-row",
+                    children: [
+                      typePill(r.type),
+                      el("span", { className: "pill green", text: `${confirmed}${r.max ? `/${r.max}` : ""} confirmed` }),
+                      el("span", { className: "pill orange", text: `${auditions} audition` }),
+                      el("span", { className: "pill blue", text: `${passed} passed` })
+                    ]
+                  })
+                ]
+              });
+            })
+          : [el("div", { className: "empty", text: "No roles loaded." })]
+        )
+      );
+    }
+
+    function renderAll() {
+      updateStats();
+      renderMembers();
+      renderApplications();
+      renderRoleOverview();
+    }
+
+    async function updateMemberStatus(email) {
+      const u = getUser(email);
+      if (!u) return;
+
+      const next = !Boolean(u.member);
+
+      const ok = await confirmDialog(
+        next ? "Make Member" : "Make Recruit",
+        `${next ? "Make" : "Move"} ${u.name || email} ${next ? "a member" : "back to recruit"}?`,
+        { confirmText: next ? "Make Member" : "Make Recruit" }
+      );
+
+      if (!ok) return;
+
+      await setDoc(doc(db, USERS_COLLECTION, email), {
+        member: next
+      }, { merge: true });
+    }
+
+    async function clearMemberRole(email) {
+      const u = getUser(email);
+      if (!u) return;
+
+      const ok = await confirmDialog(
+        "Clear Role",
+        `Fully reset role data for ${u.name || email}?\n\nThis will:\n• Clear their Department / Role field\n• Delete all role applications and audition records\n\nMember / Recruit status will not be changed.`,
+        {
+          confirmText: "Clear Role",
+          danger: true
+        }
+      );
+
+      if (!ok) return;
+
+      await updateDoc(doc(db, USERS_COLLECTION, email), {
+        department: deleteField()
+      });
+
+      const roleDocs = await getDocs(
+        query(
+          collection(db, ROLES_COLLECTION),
+          where("userEmail", "==", email)
+        )
+      );
+
+      await Promise.all(
+        roleDocs.docs.map(roleDoc =>
+          deleteDoc(doc(db, ROLES_COLLECTION, roleDoc.id))
+        )
+      );
+    }
+
+    async function updateApplicationStatus(id, status) {
+      const a = state.applications.find(x => x.id === id);
+      if (!a) return;
+
+      const ok = await confirmDialog(
+        "Update Role Status",
+        `Set ${a.userEmail}'s ${roleLabel(a.roleId)} status to ${statusLabel(status)}?`,
+        {
+          confirmText: "Update",
+          danger: ["rejected", "cancelled", "declined"].includes(status)
+        }
+      );
+
+      if (!ok) return;
+
+      await updateDoc(doc(db, ROLES_COLLECTION, id), {
+        status,
+        updatedAt: serverTimestamp()
+      });
+
+      if (status === "confirmed") {
+        await setDoc(doc(db, USERS_COLLECTION, a.userEmail), {
+          department: a.roleId,
+          member: true
+        }, { merge: true });
+      }
+    }
+
+    function listenData() {
+      if (state.unsubscribeUsers) state.unsubscribeUsers();
+      if (state.unsubscribeApplications) state.unsubscribeApplications();
+
+      state.unsubscribeUsers = onSnapshot(collection(db, USERS_COLLECTION), snap => {
+        state.users = snap.docs.map(d => ({
+          id: d.id,
+          email: d.id,
+          ...d.data()
+        }));
+        renderAll();
+      });
+
+      state.unsubscribeApplications = onSnapshot(collection(db, ROLES_COLLECTION), snap => {
+        state.applications = snap.docs.map(d => ({
+          id: d.id,
+          ...d.data()
+        }));
+        renderAll();
+      });
+    }
+
+    async function login(e) {
+      e.preventDefault();
+
+      const email = dom.loginEmail.value.trim();
+      const password = dom.loginPassword.value;
+
+      setStatus(dom.loginStatus, "");
+
+      if (email.toLowerCase() !== ALLOWED_EMAIL) {
+        setStatus(dom.loginStatus, "Access denied. This account is not authorized.");
+        return;
+      }
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (error) {
+        console.error(error);
+        setStatus(dom.loginStatus, `Login failed: ${error.message}`);
+      }
+    }
+
+    async function logout() {
+      if (state.unsubscribeUsers) state.unsubscribeUsers();
+      if (state.unsubscribeApplications) state.unsubscribeApplications();
+      await signOut(auth);
+    }
+
+    dom.loginForm.addEventListener("submit", login);
+    dom.logoutBtn.addEventListener("click", logout);
+
+    [dom.memberSearch, dom.memberFilter].forEach(c => {
+      c.addEventListener("input", renderMembers);
+      c.addEventListener("change", renderMembers);
+    });
+
+    [dom.applicationSearch, dom.roleFilter, dom.statusFilter, dom.typeFilter].forEach(c => {
+      c.addEventListener("input", renderApplications);
+      c.addEventListener("change", renderApplications);
+    });
+
+    dom.memberList.addEventListener("click", e => {
+      const b = e.target.closest("button[data-action]");
+      if (!b) return;
+
+      const { action, email } = b.dataset;
+
+      if (action === "toggleMember") {
+        updateMemberStatus(email).catch(err =>
+          alertDialog("Could not update member", err.message)
+        );
+      }
+
+      if (action === "clearRole") {
+        clearMemberRole(email).catch(err =>
+          alertDialog("Could not clear role", err.message)
+        );
+      }
+    });
+
+    dom.applicationList.addEventListener("click", e => {
+      const b = e.target.closest("button[data-action]");
+      if (!b) return;
+
+      if (b.dataset.action === "setStatus") {
+        updateApplicationStatus(b.dataset.id, b.dataset.status).catch(err =>
+          alertDialog("Could not update role", err.message)
+        );
+      }
+    });
+
+    onAuthStateChanged(auth, async user => {
+      if (!user) {
+        showLogin();
+        return;
+      }
+
+      if (user.email?.toLowerCase() !== ALLOWED_EMAIL) {
+        setStatus(dom.loginStatus, "Access denied. This account is not authorized.");
+        await signOut(auth);
+        showLogin();
+        return;
+      }
+
+      try {
+        await loadRoleGroups();
+        showApp();
+        listenData();
+      } catch (err) {
+        console.error(err);
+        await alertDialog("Could not load admin page", err.message);
+      }
+    });
   </script>
 </body>
 </html>
