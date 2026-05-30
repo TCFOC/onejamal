@@ -1,0 +1,26 @@
+[
+  {
+    "id": "operations",
+    "name": "Operations Group",
+    "roles": [
+      {
+        "id": "speaker",
+        "name": "Speaker",
+        "type": "audition",
+        "auditionDate": "XX June 2026, 13:00",
+        "applyStart": "2026-05-01T00:00:00+07:00",
+        "applyEnd": "2026-07-31T23:59:59+07:00",
+        "description": "Host or speak for event segments."
+      },
+      {
+        "id": "registration",
+        "name": "Registration Desk",
+        "type": "direct",
+        "max": 7,
+        "applyStart": "2026-05-01T00:00:00+07:00",
+        "applyEnd": "2026-07-31T23:59:59+07:00",
+        "description": "Handle check-in and registration flow."
+      }
+    ]
+  }
+]
