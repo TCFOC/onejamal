@@ -810,6 +810,19 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
+    const params = new URLSearchParams(window.location.search);
+    const AUTH_SOURCE = params.get("source");
+    const ROLES_PAGE = "/onejamal/roles";
+
+    function redirectAfterAuthIfNeeded() {
+      if (AUTH_SOURCE === "roles") {
+        window.location.href = ROLES_PAGE;
+        return true;
+      }
+
+      return false;
+    }
+
     const $ = (id) => document.getElementById(id);
 
     const dom = {
@@ -1208,6 +1221,7 @@ async function loadNextMeeting() {
 
       try {
         await signInWithEmailAndPassword(auth, email, password);
+        redirectAfterAuthIfNeeded();
       } catch (error) {
         dom.loginStatus.textContent = `Login failed: ${error.message}`;
       }
@@ -1229,6 +1243,7 @@ async function loadNextMeeting() {
       try {
         await createUserWithEmailAndPassword(auth, email, password);
         await setDoc(doc(db, "users", email), { name, member: false });
+        redirectAfterAuthIfNeeded();
       } catch (error) {
         dom.signupStatus.textContent = `Signup failed: ${error.message}`;
       }
@@ -1251,6 +1266,8 @@ async function loadNextMeeting() {
     }
 
     async function handleSignedInUser(user) {
+      if (redirectAfterAuthIfNeeded()) return;
+
       hideElement(dom.loginOverlay);
       showElement(dom.appContent, "flex");
 
