@@ -4,23 +4,14 @@
     "name": "Creative Contest",
     "roles": [
       {
-        "id": "ccmainstaff",
-        "name": "Leadership Team",
+        "id": "ccplanning",
+        "name": "Planning Team",
         "type": "audition",
         "auditionDate": "03 June 2026, time TBA",
         "applyStart": "2026-06-01T00:00:00+07:00",
         "applyEnd": "2026-06-02T23:59:59+07:00",
-        "description": "Opening positions: Vice Head (รองประธาน) and Secretary (เลขานุการ) for the TCF Creative Contest 2027. Note that these openings may change if necessary."
+        "description": "Opening up to 4 positions to help plan the TCF Creative Contest 2027. Members will get to lead the event operations, and some will be selected as Vice Head (รองประธาน) or Secretary (เลขานุการ) at a later time."
       },
-      {
-        "id": "ccjudge",
-        "name": "First Round Judge",
-        "type": "audition",
-        "auditionDate": "03 June 2026, time TBA",
-        "applyStart": "2026-06-01T00:00:00+07:00",
-        "applyEnd": "2026-06-02T23:59:59+07:00",
-        "description": "Judge the submissions of the first round of the Creative Contest. Those applying must have experience in innovation-related contests."
-      }, 
       {
         "id": "ccpr",
         "name": "Public Relations and Graphic Design",
@@ -28,7 +19,7 @@
         "auditionDate": "03 June 2026, time TBA",
         "applyStart": "2026-06-01T00:00:00+07:00",
         "applyEnd": "2026-06-02T23:59:59+07:00",
-        "description": "Manage PR, including social media posts, contest posters, contact letters, and graphic design."
+        "description": "Manage PR, including social media posts, contest posters, contact letters, and graphic design, of the TCF Creative Contest."
       }
     ]
   }
