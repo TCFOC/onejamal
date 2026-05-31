@@ -676,7 +676,6 @@
         <p><strong>Full Name:</strong> <span id="accountName"></span></p>
         <p><strong>Email:</strong> <span id="accountEmail"></span></p>
         <p><strong>Status:</strong> <span id="accountStatus"></span></p>
-        <p><strong>Role:</strong> <span id="role"></span></p>
         <p class="version">One Jamal Version 3.5.1</p>
 
         <a class="dropdown-button blue" href="https://tcfthailand.com/tstaff/settings">Account Settings</a>
@@ -804,7 +803,6 @@
       accountName: $("accountName"),
       accountEmail: $("accountEmail"),
       accountStatus: $("accountStatus"),
-      role: $("role"),
       trbutton: $("trbutton"),
       loginTab: $("loginTab"),
       signupTab: $("signupTab"),
@@ -1229,7 +1227,6 @@ async function loadNextMeeting() {
       setText(dom.accountName, name);
       setText(dom.accountEmail, user.email);
       setText(dom.accountStatus, memberStatus);
-      setText(dom.role, DEPARTMENT_LABELS[department] || "-");
     }
 
     async function handleSignedInUser(user) {
