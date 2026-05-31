@@ -1,25 +1,34 @@
 [
   {
-    "id": "operations",
-    "name": "Event Operations",
+    "id": "cc",
+    "name": "Creative Contest",
     "roles": [
       {
-        "id": "speaker",
-        "name": "Role A (demo)",
+        "id": "ccmainstaff",
+        "name": "Leadership Team",
         "type": "audition",
-        "auditionDate": "XX June 2026, 13:00",
-        "applyStart": "2026-05-01T00:00:00+07:00",
-        "applyEnd": "2026-07-31T23:59:59+07:00",
-        "description": "Host or speak for event segments."
+        "auditionDate": "03 June 2026, time TBA",
+        "applyStart": "2026-06-01T00:00:00+07:00",
+        "applyEnd": "2026-06-02T23:59:59+07:00",
+        "description": "Opening positions: Vice Head (รองประธาน) and Secretary (เลขานุการ) for the TCF Creative Contest 2027. Note that these openings may change if necessary."
       },
       {
-        "id": "registration",
-        "name": "Role B (demo)",
-        "type": "direct",
-        "max": 7,
-        "applyStart": "2026-05-01T00:00:00+07:00",
-        "applyEnd": "2026-07-31T23:59:59+07:00",
-        "description": "Handle check-in and registration flow."
+        "id": "ccjudge",
+        "name": "First Round Judge",
+        "type": "audition",
+        "auditionDate": "03 June 2026, time TBA",
+        "applyStart": "2026-06-01T00:00:00+07:00",
+        "applyEnd": "2026-06-02T23:59:59+07:00",
+        "description": "Judge the submissions of the first round of the Creative Contest. Those applying must have experience in innovation-related contests."
+      }, 
+      {
+        "id": "ccpr",
+        "name": "Public Relations and Graphic Design",
+        "type": "audition",
+        "auditionDate": "03 June 2026, time TBA",
+        "applyStart": "2026-06-01T00:00:00+07:00",
+        "applyEnd": "2026-06-02T23:59:59+07:00",
+        "description": "Manage PR, including social media posts, contest posters, contact letters, and graphic design."
       }
     ]
   }
