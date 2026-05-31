@@ -1,11 +1,11 @@
 [
   {
     "id": "operations",
-    "name": "Operations Group",
+    "name": "Event Operations",
     "roles": [
       {
         "id": "speaker",
-        "name": "Speaker",
+        "name": "Role A (demo)",
         "type": "audition",
         "auditionDate": "XX June 2026, 13:00",
         "applyStart": "2026-05-01T00:00:00+07:00",
@@ -14,7 +14,7 @@
       },
       {
         "id": "registration",
-        "name": "Registration Desk",
+        "name": "Role B (demo)",
         "type": "direct",
         "max": 7,
         "applyStart": "2026-05-01T00:00:00+07:00",
