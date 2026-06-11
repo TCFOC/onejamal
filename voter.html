@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendar</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --brand-start: #AD28F5;
+      --brand-end: #2D68F2;
+      --bg: #f6f7fb;
+      --text: #111;
+      --card: #fff;
+      --border: #e6e8ef;
+      --r: #ef4444;
+      --o: #fb923c;
+      --y: #eab308;
+      --g: #22c55e;
+      --b: #3b82f6;
+      --p: #a855f7;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'IBM Plex Sans Thai', system-ui, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #57A4FF, #5781FF, #FA5CA8, #FF9100);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      font-size: 1.2rem;
+      font-weight: 600;
+      width: 100%;
+    }
+
+    .brand-title {
+      white-space: nowrap;
+    }
+
+    .topbar-link {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 400;
+      opacity: 0.95;
+    }
+
+    .topbar-link:hover {
+      text-decoration: underline;
+      opacity: 1;
+    }
+
+    #mainContent {
+      width: 100%;
+      text-align: center;
+    }
+
+    button {
+      font-size: 18px;
+      background-color: white;
+      border-radius: 5px;
+      padding: 4px 16px;
+      border: 2.5px solid;
+      margin-bottom: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #eee;
+      border-color: #999 !important;
+    }
+
+    #votingFrame {
+      width: 100%;
+      height: calc(100vh - 72px);
+      border: none;
+      display: block;
+    }
+
+h2 { font-weight:600; }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="brand-title">One Jamal Voter</div>
+    <a class="topbar-link" href="https://tcfthailand.com/tstaff" target="_self">← Back to Home</a>
+  </header>
+
+  <div id="mainContent">
+    <br>
+
+    <h1 style="color:#5781FF">Welcome to One Jamal Voter</h1>
+
+    <button id="enterVotingBtn" style="border-color:#FF9100;font-size:22px;">
+      Enter Voting System
+    </button>
+
+    <br>
+
+<h2 style="margin-bottom:0;">Voting registeration</h2>
+<p style="margin-top:0;">To register, click the button below to connect with our LINE bot.<br>You will need to provide your name as registered in One Jamal.</p>
+    <button style="border-color:#5781FF" onclick="window.open('https://line.me/R/ti/p/@645ljmxs','_blank')">
+      Sign up to vote (until 18 Jun 23:59)
+    </button>
+  </div>
+
+  <script>
+    document.getElementById('enterVotingBtn').addEventListener('click', () => {
+      document.getElementById('mainContent').innerHTML = `
+        <iframe
+          id="votingFrame"
+          src="https://tcfcec.netlify.app"
+          allowfullscreen>
+        </iframe>
+      `;
+
+      document.body.style.background = "#fff";
+    });
+  </script>
+
+</body>
+
+</html>
