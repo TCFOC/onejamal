@@ -692,6 +692,7 @@
         <p><strong>Status:</strong> <span id="accountStatus"></span></p>
         <p class="version">One Jamal Version 3.6.0</p>
 
+        <a class="dropdown-button pink" href="https://tcfthailand.com/onejamal/voter">VOTE</a>
         <a class="dropdown-button blue" href="https://tcfthailand.com/tstaff/settings">Account Settings</a>
         <a class="dropdown-button line" href="https://line.me/R/ti/p/@987nwiey">LINE Contact</a>
         <button class="dropdown-button orange" type="button" data-action="logout">Logout</button>
@@ -813,10 +814,16 @@
     const params = new URLSearchParams(window.location.search);
     const AUTH_SOURCE = params.get("source");
     const ROLES_PAGE = "/onejamal/roles";
+    const VOTER_PAGE = "/onejamal/voter";
 
     function redirectAfterAuthIfNeeded() {
       if (AUTH_SOURCE === "roles") {
         window.location.href = ROLES_PAGE;
+        return true;
+      }
+
+      if (AUTH_SOURCE === "election") {
+        window.location.href = VOTER_PAGE;
         return true;
       }
 
