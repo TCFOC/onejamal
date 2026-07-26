@@ -338,12 +338,14 @@
     <select id="dueSelect" class="select">
       <option value="all">All Due</option>
       <option value="overdue">Overdue Tasks</option>
-      <option value="10">October</option>
-      <option value="111">Early November</option>
-      <option value="112">Late November</option>
-      <option value="121">Early December</option>
-      <option value="122">Late December</option>
-      <option value="1">January</option>
+      <option value="2608">August 2026</option>
+      <option value="2609">September 2026</option>
+      <option value="2610">October 2026</option>
+      <option value="2681">Early November 2026</option>
+      <option value="2682">Late November</option>
+      <option value="2691">Early December</option>
+      <option value="2692">Late December</option>
+      <option value="2701">January</option>
     </select>
   </div>
 
@@ -374,7 +376,7 @@
     const grid = document.getElementById("grid");
     const emptyEl = document.getElementById("empty");
 
-    const DUE_LABELS = { 10: "October", 111: "Early November", 112: "Late November", 121: "Early December", 122: "Late December", 1: "January" };
+    const DUE_LABELS = { 2608: "August", 2609: "September", 2610: "October", 2681: "Early Nov", 2682: "Late Nov", 2691: "Early Dec", 2692: "Late Dec", 2701: "Jan 2027" };
     const STATUS_LABELS = { red: "Not Done", yellow: "In Progress", green: "Done" };
 
     const DEPT_LABELS = {
@@ -416,12 +418,14 @@ if (fdue !== "all") {
 
   // Overdue mapping
   const overdueBoundary = {
-    10:  new Date("2025-11-01"), // after 31 Oct
-    111: new Date("2025-11-16"), // after 15 Nov
-    112: new Date("2025-12-01"), // after 30 Nov
-    121: new Date("2025-12-16"), // after 15 Dec
-    122: new Date("2026-01-01"), // after 31 Dec
-    1:   new Date("2026-02-01")  // after 31 Jan
+    2608: new Date("2026-09-01"), 
+    2609: new Date("2026-10-01"), 
+    2610: new Date("2026-11-01"), 
+    2681: new Date("2026-11-16"), 
+    2682: new Date("2026-12-01"), 
+    2691: new Date("2026-12-16"), 
+    2692: new Date("2027-01-01"), 
+    2701: new Date("2027-02-01"), 
   };
 
   const today = new Date();
@@ -445,7 +449,7 @@ if (fdue !== "all") {
       });
 
       
-
+      //Old format
       function dueRank(d) {
         if (d === 10) return 1;     // Oct
         if (d === 111) return 2;    // Early Nov
@@ -469,7 +473,7 @@ if (fdue !== "all") {
         if (aDone !== bDone) return aDone ? 1 : -1;
 
         // If both same done status, sort by due → priority → name
-        if (dueRank(a.due) !== dueRank(b.due)) return (dueRank(a.due) ?? 9999) - (dueRank(b.due) ?? 9999);
+        if (a.due !== b.due) return (a.due ?? 9999) - (b.due ?? 9999);
         if (a.priority !== b.priority) return (a.priority ?? 99) - (b.priority ?? 99);
         return a.name.localeCompare(b.name, 'th');
       });
