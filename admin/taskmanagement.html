@@ -678,13 +678,13 @@
           <select id="filterDue" class="select">
             <option value="">All Due</option>
             <option value="2609">September</option>
-            <option value="10">October</option>
-            <option value="111">Early November</option>
-            <option value="112">Late November</option>
-            <option value="121">Early December</option>
-            <option value="122">Late December</option>
-            <option value="1">January</option>
-            <option value="999">Unspecified</option>
+            <option value="2610">October</option>
+            <option value="2681">Early November</option>
+            <option value="2682">Late November</option>
+            <option value="2691">Early December</option>
+            <option value="2692">Late December</option>
+            <option value="2701">January</option>
+            <option value="9999">Unspecified</option>
           </select>
         </div>
 
@@ -800,13 +800,13 @@
       },
       due: {
         2609: "September",
-        10: "October",
-        111: "Early November",
-        112: "Late November",
-        121: "Early December",
-        122: "Late December",
-        1: "January",
-        999: "Unspecified",
+        2610: "October",
+        2681: "Early November",
+        2682: "Late November",
+        2691: "Early December",
+        2692: "Late December",
+        2701: "January",
+        9999: "Unspecified",
       },
       priority: {
         1: "High",
@@ -863,8 +863,7 @@
     function compareTasks(a, b) {
       if (a.important !== b.important) return a.important ? -1 : 1;
 
-      const dueDifference = dueRank(a.due) - dueRank(b.due);
-      if (dueDifference) return dueDifference;
+      if (a.due !== b.due) return a.due - b.due;
 
       if (a.priority !== b.priority) return a.priority - b.priority;
 
