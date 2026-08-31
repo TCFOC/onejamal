@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>One Jamal Admin</title>
+  <meta name="description" content="One Jamal Taskcheck Admin Panel" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="https://tcfthailand.com/tstaff/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="128x128" href="https://tcfthailand.com/tstaff/favicon.ico" />
+
+  <style>
+    :root {
+      --brand-1: #57a4ff;
+      --brand-2: #5781ff;
+      --brand-3: #fa5ca8;
+      --brand-4: #ff9100;
+      --brand-start: #ad28f5;
+      --brand-end: #2d68f2;
+
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --text: #111111;
+      --muted: #666666;
+      --border: #e6e8ef;
+      --shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+      --shadow-strong: 0 16px 34px rgba(0, 0, 0, 0.10);
+
+      --dept-all: #64748b;
+      --dept-core: #2d68f2;
+      --dept-finance: #26a269;
+      --dept-pr: #7c3aed;
+      --dept-supervision: #eab308;
+      --dept-activities: #ef4444;
+      --dept-recruits: #fb923c;
+      --dept-cc: #9c6b3c;
+      --dept-grading: #475569;
+
+      --status-red: #ef4444;
+      --status-yellow: #f5c32c;
+      --status-green: #22c55e;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100svh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "IBM Plex Sans Thai", system-ui, sans-serif;
+      line-height: 1.6;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--brand-1), var(--brand-2), var(--brand-3), var(--brand-4));
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .brand-title {
+      white-space: nowrap;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .topbar-link,
+    .topbar-button {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.45rem 0.75rem;
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .topbar-link:hover,
+    .topbar-button:hover {
+      background: rgba(255, 255, 255, 0.24);
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 24px));
+      margin: 0 auto;
+      padding: 18px 0 32px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      color: var(--brand-start);
+      font-size: clamp(1.45rem, 4vw, 2rem);
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0.25rem 0 0;
+      color: var(--muted);
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.38rem 0.7rem;
+      background: #ffffff;
+      box-shadow: var(--shadow);
+      font-size: 0.9rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+    }
+
+    .dot.red { background: var(--status-red); }
+    .dot.yellow { background: var(--status-yellow); }
+    .dot.green { background: var(--status-green); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(300px, 0.85fr) minmax(0, 1.4fr);
+      gap: 12px;
+      align-items: start;
+    }
+
+    .card {
+      display: flex;
+      min-height: 0;
+      flex-direction: column;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      animation: fade-up 0.28s ease both;
+    }
+
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card-title {
+      margin: 0 0 0.8rem;
+      color: var(--brand-start);
+      font-size: 1.2rem;
+      line-height: 1.3;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .field {
+      display: grid;
+      gap: 0.28rem;
+    }
+
+    .field label {
+      color: #333333;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .input,
+    .select,
+    .textarea {
+      width: 100%;
+      border: 1px solid #cccccc;
+      border-radius: 10px;
+      padding: 0.72rem 0.78rem;
+      outline: none;
+      background: #ffffff;
+      color: var(--text);
+    }
+
+    .textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .input:focus,
+    .select:focus,
+    .textarea:focus {
+      border-color: var(--brand-end);
+      box-shadow: 0 0 0 4px rgba(45, 104, 242, 0.12);
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      color: #333333;
+    }
+
+    .checkbox-row input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--brand-end);
+    }
+
+    .button-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 0.25rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      border: 0;
+      border-radius: 10px;
+      padding: 0.7rem 0.9rem;
+      color: #ffffff;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, opacity 0.16s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .button.blue { background: var(--brand-end); }
+    .button.orange { background: var(--brand-4); }
+    .button.gray {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    .status-message {
+      min-height: 1.35em;
+      margin: 0.55rem 0 0;
+      color: #d23;
+      font-size: 0.9rem;
+    }
+
+    .status-message.success {
+      color: #15803d;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: 1fr 160px 160px 130px;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .task-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .task-card {
+      border: 1px solid var(--border);
+      border-left: 5px solid transparent;
+      border-radius: 14px;
+      background: #ffffff;
+      padding: 0.85rem;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    }
+
+    .task-card.important {
+      border-left-color: var(--status-red);
+    }
+
+    .task-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.25rem 0.55rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .pill-priority-1 {
+      border-color: #fecaca;
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .pill-priority-2 {
+      border-color: #fed7aa;
+      background: #ffedd5;
+      color: #9a3412;
+    }
+
+    .pill-priority-3 {
+      border-color: #fde68a;
+      background: #fef3c7;
+      color: #854d0e;
+    }
+
+    .pill-dept {
+      border-color: transparent;
+      color: #ffffff;
+    }
+
+    .pill-dept-allmembers {
+      border-color: #cbd5e1;
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .pill-dept-core { background: var(--dept-core); }
+    .pill-dept-finance { background: var(--dept-finance); }
+    .pill-dept-pr { background: var(--dept-pr); }
+    .pill-dept-supervision { background: var(--dept-supervision); }
+    .pill-dept-activities { background: var(--dept-activities); }
+    .pill-dept-recruits { background: var(--dept-recruits); }
+    .pill-dept-cc { background: var(--dept-cc); }
+    .pill-dept-grading { background: var(--dept-grading); }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: #333333;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .task-name {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
+    .task-desc {
+      margin: 0.25rem 0 0;
+      color: #333333;
+      font-size: 0.92rem;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .task-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 0.7rem;
+    }
+
+    .mini-button {
+      border: 0;
+      border-radius: 8px;
+      padding: 0.45rem 0.7rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .mini-button.edit {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .mini-button.delete {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .mini-button.done {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .empty-state {
+      border: 2px dashed var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      background: linear-gradient(180deg, #ffffff, #fafbff);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .login-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .login-box {
+      width: min(90vw, 380px);
+      border-radius: 14px;
+      background: #ffffff;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      animation: pop-in 0.22s ease both;
+    }
+
+    @keyframes pop-in {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .login-box h1 {
+      margin: 0 0 0.25rem;
+      color: var(--brand-start);
+      font-size: 1.4rem;
+    }
+
+    .login-box p {
+      margin: 0 0 1rem;
+      color: var(--muted);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        justify-content: flex-start;
+      }
+
+      .filters {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      html {
+        font-size: 15px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .top-actions {
+        justify-content: flex-start;
+      }
+
+      .filters,
+      .button-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand-title">Admin</div>
+    <div class="top-actions">
+      <a class="topbar-link" href="https://tcfthailand.com/tstaff/taskcheck" target="_self">Open Taskcheck</a>
+      <a class="topbar-link" href="https://tcfthailand.com/tstaff/admin" target="_self">Admin Home</a>
+      <button id="logoutBtn" class="topbar-button hidden" type="button">Logout</button>
+    </div>
+  </header>
+
+  <main id="app" class="shell hidden">
+    <section class="hero">
+      <div>
+        <h1>Task Management</h1>
+        <p id="adminSubtext">Loading tasks...</p>
+      </div>
+
+      <div class="stats" aria-label="Task stats">
+        <span class="stat-pill"><span class="dot red"></span><span id="redCount">0</span> Not Done</span>
+        <span class="stat-pill"><span class="dot yellow"></span><span id="yellowCount">0</span> In Progress</span>
+        <span class="stat-pill"><span class="dot green"></span><span id="greenCount">0</span> Done</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <section class="card">
+        <h2 id="formTitle" class="card-title">Create Task</h2>
+
+        <form id="taskForm" class="form-grid">
+          <input id="taskId" type="hidden" />
+
+          <div class="field">
+            <label for="taskName">Task Name</label>
+            <input id="taskName" class="input" type="text" placeholder="e.g. Finalize event poster" required />
+          </div>
+
+          <div class="field">
+            <label for="taskDescription">Description / Notes</label>
+            <textarea id="taskDescription" class="textarea" placeholder="Optional notes for Taskcheck"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="taskDepartment">Department</label>
+            <select id="taskDepartment" class="select">
+              <option value="allmembers">All Members</option>
+              <option value="core">Core Team</option>
+              <option value="finance">Finances & Sponsors</option>
+              <option value="pr">Public Relations</option>
+              <option value="supervision">Student Supervision</option>
+              <option value="activities">Activities</option>
+              <option value="recruits">New Recruits</option>
+              <option value="cc">Creative Contest</option>
+              <option value="grading">Exam Grader</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="taskDue">Due</label>
+            <select id="taskDue" class="select">
+              <option value="2609">September</option>
+              <option value="10">October</option>
+              <option value="111">Early November</option>
+              <option value="112">Late November</option>
+              <option value="121">Early December</option>
+              <option value="122">Late December</option>
+              <option value="1">January</option>
+              <option value="999">Unspecified</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="taskPriority">Priority</label>
+            <select id="taskPriority" class="select">
+              <option value="1">High</option>
+              <option value="2">Medium</option>
+              <option value="3">Low</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="taskStatus">Status</label>
+            <select id="taskStatus" class="select">
+              <option value="red">Not Done</option>
+              <option value="yellow">In Progress</option>
+              <option value="green">Done</option>
+            </select>
+          </div>
+
+          <label class="checkbox-row">
+            <input id="taskImportant" type="checkbox" />
+            Important / pinned higher
+          </label>
+
+          <div class="button-row">
+            <button id="saveBtn" class="button blue" type="submit">Create Task</button>
+            <button id="resetBtn" class="button gray" type="button">Clear</button>
+          </div>
+
+          <p id="formStatus" class="status-message"></p>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2 class="card-title">Manage Tasks</h2>
+
+        <div class="filters">
+          <input id="searchInput" class="input" type="search" placeholder="Search tasks..." />
+          <select id="filterDepartment" class="select">
+            <option value="">All Departments</option>
+            <option value="allmembers">All Members</option>
+            <option value="core">Core Team</option>
+            <option value="finance">Finances & Sponsors</option>
+            <option value="pr">Public Relations</option>
+            <option value="supervision">Student Supervision</option>
+            <option value="activities">Activities</option>
+            <option value="recruits">New Recruits</option>
+            <option value="cc">Creative Contest</option>
+            <option value="grading">Exam Grader</option>
+          </select>
+          <select id="filterStatus" class="select">
+            <option value="">All Statuses</option>
+            <option value="red">Not Done</option>
+            <option value="yellow">In Progress</option>
+            <option value="green">Done</option>
+          </select>
+          <select id="filterDue" class="select">
+            <option value="">All Due</option>
+            <option value="2609">September</option>
+            <option value="10">October</option>
+            <option value="111">Early November</option>
+            <option value="112">Late November</option>
+            <option value="121">Early December</option>
+            <option value="122">Late December</option>
+            <option value="1">January</option>
+            <option value="999">Unspecified</option>
+          </select>
+        </div>
+
+        <div id="taskList" class="task-list">
+          <div class="empty-state">Loading tasks...</div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <section id="loginOverlay" class="login-overlay">
+    <form id="loginForm" class="login-box" autocomplete="on">
+      <h1>Admin Login</h1>
+
+      <div class="field">
+        <label for="loginEmail">Email</label>
+        <input id="loginEmail" class="input" type="email" placeholder="Email" autocomplete="email" required />
+      </div>
+
+      <div class="field" style="margin-top: 0.75rem;">
+        <label for="loginPassword">Password</label>
+        <input id="loginPassword" class="input" type="password" placeholder="Password" autocomplete="current-password" required />
+      </div>
+
+      <button class="button orange" type="submit" style="width: 100%; margin-top: 1rem;">Login</button>
+      <p id="loginStatus" class="status-message"></p>
+    </form>
+  </section>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signInWithEmailAndPassword,
+      signOut,
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      addDoc,
+      collection,
+      deleteDoc,
+      doc,
+      getFirestore,
+      onSnapshot,
+      serverTimestamp,
+      setDoc,
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDKHyMNxgnUH9zn0HQHDNf98GFphC9rv_4",
+      authDomain: "tstaff-tcf.firebaseapp.com",
+      projectId: "tstaff-tcf",
+      storageBucket: "tstaff-tcf.firebasestorage.app",
+      messagingSenderId: "1038965947691",
+      appId: "1:1038965947691:web:8a2f21a6424b82c14ad96e",
+    };
+
+    const ALLOWED_EMAIL = "admin@tcfthailand.com";
+    const COLLECTION_NAME = "taskcheck";
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const $ = (id) => document.getElementById(id);
+
+    const dom = {
+      app: $("app"),
+      loginOverlay: $("loginOverlay"),
+      loginForm: $("loginForm"),
+      loginEmail: $("loginEmail"),
+      loginPassword: $("loginPassword"),
+      loginStatus: $("loginStatus"),
+      logoutBtn: $("logoutBtn"),
+      adminSubtext: $("adminSubtext"),
+
+      taskForm: $("taskForm"),
+      taskId: $("taskId"),
+      taskName: $("taskName"),
+      taskDescription: $("taskDescription"),
+      taskDepartment: $("taskDepartment"),
+      taskDue: $("taskDue"),
+      taskPriority: $("taskPriority"),
+      taskStatus: $("taskStatus"),
+      taskImportant: $("taskImportant"),
+      formTitle: $("formTitle"),
+      saveBtn: $("saveBtn"),
+      resetBtn: $("resetBtn"),
+      formStatus: $("formStatus"),
+
+      searchInput: $("searchInput"),
+      filterDepartment: $("filterDepartment"),
+      filterStatus: $("filterStatus"),
+      filterDue: $("filterDue"),
+      taskList: $("taskList"),
+
+      redCount: $("redCount"),
+      yellowCount: $("yellowCount"),
+      greenCount: $("greenCount"),
+    };
+
+    const LABELS = {
+      departments: {
+        allmembers: "All Members",
+        core: "Core Team",
+        finance: "Finances & Sponsors",
+        pr: "Public Relations",
+        supervision: "Student Supervision",
+        activities: "Activities",
+        recruits: "New Recruits",
+        cc: "Creative Contest",
+        grading: "Exam Grader",
+      },
+      due: {
+        2609: "September",
+        10: "October",
+        111: "Early November",
+        112: "Late November",
+        121: "Early December",
+        122: "Late December",
+        1: "January",
+        999: "Unspecified",
+      },
+      priority: {
+        1: "High",
+        2: "Medium",
+        3: "Low",
+      },
+      status: {
+        red: "Not Done",
+        yellow: "In Progress",
+        green: "Done",
+      },
+    };
+
+    const state = {
+      tasks: [],
+      unsubscribeTasks: null,
+    };
+
+    function setStatus(el, message, type = "error") {
+      el.textContent = message;
+      el.classList.toggle("success", type === "success");
+    }
+
+    function showApp() {
+      dom.app.classList.remove("hidden");
+      dom.loginOverlay.classList.add("hidden");
+      dom.logoutBtn.classList.remove("hidden");
+    }
+
+    function showLogin() {
+      dom.app.classList.add("hidden");
+      dom.loginOverlay.classList.remove("hidden");
+      dom.logoutBtn.classList.add("hidden");
+    }
+
+    function dueRank(due) {
+      return { 2609: 0, 10: 1, 111: 2, 112: 3, 121: 4, 122: 5, 1: 6, 999: 999 }[due] ?? 999;
+    }
+
+    function normalizeTask(docSnap) {
+      const t = docSnap.data();
+      return {
+        id: docSnap.id,
+        name: String(t.name || "Untitled Task").trim(),
+        description: String(t.description || t.desc || t.notes || "").trim(),
+        department: String(t.department || "allmembers").toLowerCase(),
+        due: Number(t.due) || 999,
+        priority: Number(t.priority) || 3,
+        status: String(t.status || "red").toLowerCase(),
+        important: Boolean(t.important),
+      };
+    }
+
+    function compareTasks(a, b) {
+      if (a.important !== b.important) return a.important ? -1 : 1;
+
+      const dueDifference = dueRank(a.due) - dueRank(b.due);
+      if (dueDifference) return dueDifference;
+
+      if (a.priority !== b.priority) return a.priority - b.priority;
+
+      if (a.department === "allmembers" && b.department !== "allmembers") return -1;
+      if (b.department === "allmembers" && a.department !== "allmembers") return 1;
+      if (a.department !== b.department) return a.department.localeCompare(b.department);
+
+      const statusRank = { red: 1, yellow: 2, green: 3 };
+      const statusDifference = (statusRank[a.status] || 99) - (statusRank[b.status] || 99);
+      if (statusDifference) return statusDifference;
+
+      return a.name.localeCompare(b.name, "th");
+    }
+
+    function createElement(tag, options = {}) {
+      const el = document.createElement(tag);
+      if (options.className) el.className = options.className;
+      if (options.text != null) el.textContent = options.text;
+      if (options.children) el.append(...options.children);
+      if (options.dataset) Object.assign(el.dataset, options.dataset);
+      return el;
+    }
+
+    function renderPill(className, text) {
+      return createElement("span", { className: `pill ${className}`.trim(), text });
+    }
+
+    function renderTaskCard(task) {
+      const safeDept = LABELS.departments[task.department] ? task.department : "allmembers";
+
+      const top = createElement("div", {
+        className: "task-top",
+        children: [
+          renderPill(`pill-priority-${task.priority}`, LABELS.priority[task.priority] || `P${task.priority}`),
+          renderPill(`pill-dept pill-dept-${safeDept}`, LABELS.departments[task.department] || task.department),
+          renderPill("", LABELS.due[task.due] || String(task.due)),
+        ],
+      });
+
+      const status = createElement("div", {
+        className: "status-row",
+        children: [
+          createElement("span", { className: `dot ${task.status}` }),
+          createElement("span", { text: LABELS.status[task.status] || task.status }),
+        ],
+      });
+
+      const name = createElement("p", { className: "task-name", text: task.name });
+      const children = [top, status, name];
+
+      if (task.description) {
+        children.push(createElement("p", { className: "task-desc", text: task.description }));
+      }
+
+      const actions = createElement("div", {
+        className: "task-actions",
+        children: [
+          createElement("button", {
+            className: "mini-button edit",
+            text: "Edit",
+            dataset: { action: "edit", id: task.id },
+          }),
+          createElement("button", {
+            className: "mini-button done",
+            text: task.status === "green" ? "Mark Not Done" : "Mark Done",
+            dataset: { action: "toggleDone", id: task.id },
+          }),
+          createElement("button", {
+            className: "mini-button delete",
+            text: "Delete",
+            dataset: { action: "delete", id: task.id },
+          }),
+        ],
+      });
+
+      children.push(actions);
+
+      return createElement("article", {
+        className: `task-card${task.important ? " important" : ""}`,
+        children,
+      });
+    }
+
+    function getFilteredTasks() {
+      const q = dom.searchInput.value.trim().toLowerCase();
+      const department = dom.filterDepartment.value;
+      const status = dom.filterStatus.value;
+      const due = dom.filterDue.value;
+
+      return state.tasks.filter((task) => {
+        const matchesSearch =
+          !q ||
+          task.name.toLowerCase().includes(q) ||
+          task.description.toLowerCase().includes(q) ||
+          (LABELS.departments[task.department] || task.department).toLowerCase().includes(q);
+
+        const matchesDepartment = !department || task.department === department;
+        const matchesStatus = !status || task.status === status;
+        const matchesDue = !due || String(task.due) === due;
+
+        return matchesSearch && matchesDepartment && matchesStatus && matchesDue;
+      });
+    }
+
+    function renderTasks() {
+      const filtered = getFilteredTasks().sort(compareTasks);
+
+      if (!filtered.length) {
+        dom.taskList.replaceChildren(createElement("div", {
+          className: "empty-state",
+          text: "No tasks match the current filters.",
+        }));
+        return;
+      }
+
+      dom.taskList.replaceChildren(...filtered.map(renderTaskCard));
+    }
+
+    function updateStats() {
+      const red = state.tasks.filter((task) => task.status === "red").length;
+      const yellow = state.tasks.filter((task) => task.status === "yellow").length;
+      const green = state.tasks.filter((task) => task.status === "green").length;
+
+      dom.redCount.textContent = red;
+      dom.yellowCount.textContent = yellow;
+      dom.greenCount.textContent = green;
+      dom.adminSubtext.textContent = `${state.tasks.length} task${state.tasks.length === 1 ? "" : "s"} found`;
+    }
+
+    function listenForTasks() {
+      if (state.unsubscribeTasks) state.unsubscribeTasks();
+
+      state.unsubscribeTasks = onSnapshot(
+        collection(db, COLLECTION_NAME),
+        (snapshot) => {
+          state.tasks = snapshot.docs.map(normalizeTask);
+          updateStats();
+          renderTasks();
+        },
+        (error) => {
+          console.error(error);
+          dom.taskList.replaceChildren(createElement("div", {
+            className: "empty-state",
+            text: `Unable to load tasks: ${error.message}`,
+          }));
+        },
+      );
+    }
+
+    function readForm() {
+      return {
+        name: dom.taskName.value.trim(),
+        description: dom.taskDescription.value.trim(),
+        department: dom.taskDepartment.value,
+        due: Number(dom.taskDue.value),
+        priority: Number(dom.taskPriority.value),
+        status: dom.taskStatus.value,
+        important: dom.taskImportant.checked,
+      };
+    }
+
+    function resetForm() {
+      dom.taskForm.reset();
+      dom.taskId.value = "";
+      dom.formTitle.textContent = "Create Task";
+      dom.saveBtn.textContent = "Create Task";
+      setStatus(dom.formStatus, "");
+    }
+
+    async function saveTask(event) {
+      event.preventDefault();
+
+      const taskId = dom.taskId.value;
+      const data = readForm();
+
+      if (!data.name) {
+        setStatus(dom.formStatus, "Please enter a task name.");
+        return;
+      }
+
+      dom.saveBtn.disabled = true;
+      setStatus(dom.formStatus, "");
+
+      try {
+        const payload = {
+          ...data,
+          updatedAt: serverTimestamp(),
+        };
+
+        if (taskId) {
+          await setDoc(doc(db, COLLECTION_NAME, taskId), payload, { merge: true });
+          setStatus(dom.formStatus, "Task updated.", "success");
+        } else {
+          await addDoc(collection(db, COLLECTION_NAME), {
+            ...payload,
+            createdAt: serverTimestamp(),
+          });
+          setStatus(dom.formStatus, "Task created.", "success");
+        }
+
+        resetForm();
+      } catch (error) {
+        console.error(error);
+        setStatus(dom.formStatus, `Error: ${error.message}`);
+      } finally {
+        dom.saveBtn.disabled = false;
+      }
+    }
+
+    function editTask(id) {
+      const task = state.tasks.find((item) => item.id === id);
+      if (!task) return;
+
+      dom.taskId.value = task.id;
+      dom.taskName.value = task.name;
+      dom.taskDescription.value = task.description;
+      dom.taskDepartment.value = task.department;
+      dom.taskDue.value = String(task.due);
+      dom.taskPriority.value = String(task.priority);
+      dom.taskStatus.value = task.status;
+      dom.taskImportant.checked = task.important;
+
+      dom.formTitle.textContent = "Edit Task";
+      dom.saveBtn.textContent = "Save Changes";
+      setStatus(dom.formStatus, "Editing selected task.", "success");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    async function deleteTask(id) {
+      const task = state.tasks.find((item) => item.id === id);
+      if (!task) return;
+
+      const confirmed = window.confirm(`Delete task: "${task.name}"?`);
+      if (!confirmed) return;
+
+      try {
+        await deleteDoc(doc(db, COLLECTION_NAME, id));
+      } catch (error) {
+        console.error(error);
+        window.alert(`Delete failed: ${error.message}`);
+      }
+    }
+
+    async function toggleDone(id) {
+      const task = state.tasks.find((item) => item.id === id);
+      if (!task) return;
+
+      const nextStatus = task.status === "green" ? "red" : "green";
+
+      try {
+        await setDoc(doc(db, COLLECTION_NAME, id), {
+          status: nextStatus,
+          updatedAt: serverTimestamp(),
+        }, { merge: true });
+      } catch (error) {
+        console.error(error);
+        window.alert(`Update failed: ${error.message}`);
+      }
+    }
+
+    async function login(event) {
+      event.preventDefault();
+
+      const email = dom.loginEmail.value.trim();
+      const password = dom.loginPassword.value;
+
+      setStatus(dom.loginStatus, "");
+
+      if (email.toLowerCase() !== ALLOWED_EMAIL) {
+        setStatus(dom.loginStatus, "Access denied. This account is not authorized.");
+        return;
+      }
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (error) {
+        console.error(error);
+        setStatus(dom.loginStatus, `Login failed: ${error.message}`);
+      }
+    }
+
+    async function logout() {
+      if (state.unsubscribeTasks) {
+        state.unsubscribeTasks();
+        state.unsubscribeTasks = null;
+      }
+
+      await signOut(auth);
+    }
+
+    dom.taskForm.addEventListener("submit", saveTask);
+    dom.resetBtn.addEventListener("click", resetForm);
+    dom.loginForm.addEventListener("submit", login);
+    dom.logoutBtn.addEventListener("click", logout);
+
+    [dom.searchInput, dom.filterDepartment, dom.filterStatus, dom.filterDue].forEach((control) => {
+      control.addEventListener("input", renderTasks);
+      control.addEventListener("change", renderTasks);
+    });
+
+    dom.taskList.addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-action]");
+      if (!button) return;
+
+      const { action, id } = button.dataset;
+      if (action === "edit") editTask(id);
+      if (action === "delete") deleteTask(id);
+      if (action === "toggleDone") toggleDone(id);
+    });
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        showLogin();
+        return;
+      }
+
+      if (user.email?.toLowerCase() !== ALLOWED_EMAIL) {
+        setStatus(dom.loginStatus, "Access denied. This account is not authorized.");
+        await signOut(auth);
+        showLogin();
+        return;
+      }
+
+      showApp();
+      listenForTasks();
+    });
+  </script>
+</body>
+</html>
